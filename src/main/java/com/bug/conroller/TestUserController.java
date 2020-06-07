@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class UserController {
+public class TestUserController {
 
     @Autowired
     private UserServiceImp serviceImp;
@@ -25,6 +25,8 @@ public class UserController {
         int c=a/b;
         return "delete One";
     }
+
+
 
 
 }
