@@ -1,19 +1,22 @@
 package com.bug.controller;
 
-import com.bug.service.IUserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-@RestController
+/*
+ *   Author = Liewona
+ *   Date = 2020/6/8 20:11
+ */
+@Controller
+@RequestMapping("/api/v1")
 public class TestController {
 
-    @Autowired
-    private IUserService userService;
-
-    @RequestMapping("test")
-    public String test(){
-        userService.getAllStudents();
-        return "hello bug";
+    @GetMapping("/test")
+    @ResponseBody
+    public String test() {
+//        new MyTest().test();
+        return "sususus";
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,10 +30,10 @@ public class dataSource {
 
     //注册管理数据源的servlet
     @Bean
-     public ServletRegistrationBean getStatViewServlet(){
-         ServletRegistrationBean registrationBean=new ServletRegistrationBean();
+     public ServletRegistrationBean<StatViewServlet> getStatViewServlet(){
+         ServletRegistrationBean<StatViewServlet> registrationBean=new ServletRegistrationBean<>();
          registrationBean.setServlet(new StatViewServlet());
-         registrationBean.setUrlMappings(Arrays.asList("/druid/*"));//设置访问路径
+         registrationBean.setUrlMappings(Collections.singletonList("/druid/*"));//设置访问路径
          Map<String,String> initiParameters=new HashMap<>();
          initiParameters.put("loginUsername","admin");//设置登录账户
          initiParameters.put("loginPassword","123456");
@@ -45,8 +46,8 @@ public class dataSource {
 
     //注册一个web监控的过滤器
     @Bean
-    public FilterRegistrationBean getStatViewFilter(){
-        FilterRegistrationBean registrationBean=new FilterRegistrationBean();
+    public FilterRegistrationBean<WebStatFilter> getStatViewFilter(){
+        FilterRegistrationBean<WebStatFilter> registrationBean=new FilterRegistrationBean<>();
         registrationBean.setFilter(new WebStatFilter());
         Map<String,String> initiParameters=new HashMap<>();
         initiParameters.put("exclusions","*.js,*.css,/druid/*");//设置不拦截路径

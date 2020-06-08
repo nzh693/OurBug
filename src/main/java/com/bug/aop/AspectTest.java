@@ -5,6 +5,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.Method;
 import java.util.Arrays;
 
 /**
@@ -23,7 +24,7 @@ public class AspectTest {
      *              ..表示有无参数均可
      *
      */
-    @Pointcut(value = "execution(  * com.bug.service.UserServiceImp.*(..))")
+    @Pointcut(value = "execution(* com.bug.service..*.*(..))")
     public void pointCount(){}
 
     /**
@@ -51,8 +52,10 @@ public class AspectTest {
      * @param joinPoint
      * @param re
      */
-    @AfterReturning(value = "pointCount()",returning = "re")
-    public void AfterReturning(JoinPoint joinPoint,String re){
+    @AfterReturning(value = "pointCount()",returning = "re", argNames = "joinPoint,re")
+    public void AfterReturning(JoinPoint joinPoint, Object re){
+        System.out.println(joinPoint.getSignature().toShortString());
+
         System.out.println("--------后置返回通知 返回--------"+re);
     }
 
@@ -61,7 +64,7 @@ public class AspectTest {
      * @param exception
      */
     @AfterThrowing(value = "pointCount()",throwing = "exception")
-    public void AfterThrowing(NullPointerException exception  ){
+    public void AfterThrowing(Exception exception  ){
         System.out.println("-----------"+"异常通知");
     }
 
@@ -69,7 +72,7 @@ public class AspectTest {
      * 环绕通知
      * @param pJoinPoint
      */
-    @Around("execution(* com.bug.service.UserServiceImp.*(..))")
+    @Around("execution(* com.bug.service.*.*(..))")
     public void around(ProceedingJoinPoint pJoinPoint){
         System.out.println("----------环绕通知调用方法-----"+pJoinPoint.getSignature().getName());
         Object obj=null;

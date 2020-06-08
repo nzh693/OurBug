@@ -26,12 +26,32 @@ public class Users extends Model<Users> {
     /**
      * 用户名
      */
-    private String username;
+    private String account;
 
     /**
      * 密码
      */
     private String password;
+
+    /**
+     * 真实姓名
+     */
+    private String nickname;
+
+    /**
+     * 电话号码
+     */
+    private String phone;
+
+    /**
+     * 性别
+     */
+    private String sex;
+
+    /**
+     * 职位，对应权限
+     */
+    private String position;
 
     /**
      * 客户经理：1，销售主管：2，高管：3，系统管理员：4
@@ -47,12 +67,12 @@ public class Users extends Model<Users> {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getAccount() {
+        return account;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setAccount(String account) {
+        this.account = account;
     }
 
     public String getPassword() {
@@ -61,6 +81,38 @@ public class Users extends Model<Users> {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
     }
 
     public Integer getLimit() {
@@ -80,8 +132,12 @@ public class Users extends Model<Users> {
     public String toString() {
         return "Users{" +
         "id=" + id +
-        ", username=" + username +
+        ", account=" + account +
         ", password=" + password +
+        ", nickname=" + nickname +
+        ", phone=" + phone +
+        ", sex=" + sex +
+        ", position=" + position +
         ", limit=" + limit +
         "}";
     }

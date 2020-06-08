@@ -3,8 +3,6 @@ package com.bug.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
-import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 
 /**
@@ -20,7 +18,7 @@ public class SaleChance extends Model<SaleChance> {
     private static final long serialVersionUID=1L;
 
     /**
-     * 自增主键
+     * 机会id
      */
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
@@ -28,64 +26,57 @@ public class SaleChance extends Model<SaleChance> {
     /**
      * 客户姓名
      */
-    @TableField("customerName")
     private String customerName;
 
     /**
      * 机会来源
      */
-    @TableField("chanceSrc")
-    private String chanceSrc;
+    private String chanceFrom;
 
     /**
-     * 所有联系人id
+     * 联系电话
      */
-    @TableField("linkIds")
-    private String linkIds;
+    private String telephone;
 
     /**
-     * 客户联系电话
+     * 成功几率(%)
      */
-    private String phone;
+    private Integer successRate;
 
     /**
-     * 成功几率
+     * 概要
      */
-    private String percentage;
+    private String schema;
 
     /**
-     * 概要描述
+     * 机会描述
      */
-    private String describe;
+    private String desc;
 
     /**
-     * 机会状态
+     * 创建人
      */
-    @TableField("chanceStatus")
-    private String chanceStatus;
-
-    /**
-     * 创建人id
-     */
-    @TableField("createBy")
-    private Integer createBy;
+    private Integer createUserid;
 
     /**
      * 创建时间
      */
-    @TableField("createTime")
-    private LocalDateTime createTime;
+    private String time;
 
     /**
-     * 指派给的联系人的id
+     * 指派给
      */
-    private Integer appoint;
+    private Integer userid;
 
     /**
      * 指派时间
      */
-    @TableField("appointTime")
-    private LocalDateTime appointTime;
+    private String assginTime;
+
+    /**
+     * 机会状态：0：未分派；1：已分派；2：开发成功；3：开发失败
+     */
+    private Integer state;
 
 
     public Integer getId() {
@@ -104,84 +95,84 @@ public class SaleChance extends Model<SaleChance> {
         this.customerName = customerName;
     }
 
-    public String getChanceSrc() {
-        return chanceSrc;
+    public String getChanceFrom() {
+        return chanceFrom;
     }
 
-    public void setChanceSrc(String chanceSrc) {
-        this.chanceSrc = chanceSrc;
+    public void setChanceFrom(String chanceFrom) {
+        this.chanceFrom = chanceFrom;
     }
 
-    public String getLinkIds() {
-        return linkIds;
+    public String getTelephone() {
+        return telephone;
     }
 
-    public void setLinkIds(String linkIds) {
-        this.linkIds = linkIds;
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
     }
 
-    public String getPhone() {
-        return phone;
+    public Integer getSuccessRate() {
+        return successRate;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setSuccessRate(Integer successRate) {
+        this.successRate = successRate;
     }
 
-    public String getPercentage() {
-        return percentage;
+    public String getSchema() {
+        return schema;
     }
 
-    public void setPercentage(String percentage) {
-        this.percentage = percentage;
+    public void setSchema(String schema) {
+        this.schema = schema;
     }
 
-    public String getDescribe() {
-        return describe;
+    public String getDesc() {
+        return desc;
     }
 
-    public void setDescribe(String describe) {
-        this.describe = describe;
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
-    public String getChanceStatus() {
-        return chanceStatus;
+    public Integer getCreateUserid() {
+        return createUserid;
     }
 
-    public void setChanceStatus(String chanceStatus) {
-        this.chanceStatus = chanceStatus;
+    public void setCreateUserid(Integer createUserid) {
+        this.createUserid = createUserid;
     }
 
-    public Integer getCreateBy() {
-        return createBy;
+    public String getTime() {
+        return time;
     }
 
-    public void setCreateBy(Integer createBy) {
-        this.createBy = createBy;
+    public void setTime(String time) {
+        this.time = time;
     }
 
-    public LocalDateTime getCreateTime() {
-        return createTime;
+    public Integer getUserid() {
+        return userid;
     }
 
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
+    public void setUserid(Integer userid) {
+        this.userid = userid;
     }
 
-    public Integer getAppoint() {
-        return appoint;
+    public String getAssginTime() {
+        return assginTime;
     }
 
-    public void setAppoint(Integer appoint) {
-        this.appoint = appoint;
+    public void setAssginTime(String assginTime) {
+        this.assginTime = assginTime;
     }
 
-    public LocalDateTime getAppointTime() {
-        return appointTime;
+    public Integer getState() {
+        return state;
     }
 
-    public void setAppointTime(LocalDateTime appointTime) {
-        this.appointTime = appointTime;
+    public void setState(Integer state) {
+        this.state = state;
     }
 
     @Override
@@ -194,16 +185,16 @@ public class SaleChance extends Model<SaleChance> {
         return "SaleChance{" +
         "id=" + id +
         ", customerName=" + customerName +
-        ", chanceSrc=" + chanceSrc +
-        ", linkIds=" + linkIds +
-        ", phone=" + phone +
-        ", percentage=" + percentage +
-        ", describe=" + describe +
-        ", chanceStatus=" + chanceStatus +
-        ", createBy=" + createBy +
-        ", createTime=" + createTime +
-        ", appoint=" + appoint +
-        ", appointTime=" + appointTime +
+        ", chanceFrom=" + chanceFrom +
+        ", telephone=" + telephone +
+        ", successRate=" + successRate +
+        ", schema=" + schema +
+        ", desc=" + desc +
+        ", createUserid=" + createUserid +
+        ", time=" + time +
+        ", userid=" + userid +
+        ", assginTime=" + assginTime +
+        ", state=" + state +
         "}";
     }
 }

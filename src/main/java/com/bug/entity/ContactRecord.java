@@ -3,6 +3,7 @@ package com.bug.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 
 /**
@@ -13,50 +14,46 @@ import java.io.Serializable;
  * @author Liewona
  * @since 2020-06-08
  */
-public class Linkman extends Model<Linkman> {
+public class ContactRecord extends Model<ContactRecord> {
 
     private static final long serialVersionUID=1L;
 
     /**
-     * 自增主键
+     * 记录ID
      */
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     /**
-     * 联系人姓名
+     * 记录上传时间
      */
-    private String name;
+    private String time;
 
     /**
-     * 性别
+     * 事件
      */
-    private String sex;
+    @TableField("eventCount")
+    private String eventCount;
 
     /**
      * 职位
      */
-    private String position;
+    private String opsition;
 
     /**
-     * 工作电话
+     * 办公电话
      */
     private String telephone;
 
     /**
-     * 手机
+     * 移动电话
      */
-    private String phone;
+    private String mobiephone;
 
     /**
-     * 备注信息
+     * 移动电话
      */
     private String comment;
-
-    /**
-     * 销售机会id
-     */
-    private Integer chanceid;
 
 
     public Integer getId() {
@@ -67,28 +64,28 @@ public class Linkman extends Model<Linkman> {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTime() {
+        return time;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTime(String time) {
+        this.time = time;
     }
 
-    public String getSex() {
-        return sex;
+    public String getEventCount() {
+        return eventCount;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex;
+    public void setEventCount(String eventCount) {
+        this.eventCount = eventCount;
     }
 
-    public String getPosition() {
-        return position;
+    public String getOpsition() {
+        return opsition;
     }
 
-    public void setPosition(String position) {
-        this.position = position;
+    public void setOpsition(String opsition) {
+        this.opsition = opsition;
     }
 
     public String getTelephone() {
@@ -99,12 +96,12 @@ public class Linkman extends Model<Linkman> {
         this.telephone = telephone;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getMobiephone() {
+        return mobiephone;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setMobiephone(String mobiephone) {
+        this.mobiephone = mobiephone;
     }
 
     public String getComment() {
@@ -115,14 +112,6 @@ public class Linkman extends Model<Linkman> {
         this.comment = comment;
     }
 
-    public Integer getChanceid() {
-        return chanceid;
-    }
-
-    public void setChanceid(Integer chanceid) {
-        this.chanceid = chanceid;
-    }
-
     @Override
     protected Serializable pkVal() {
         return this.id;
@@ -130,15 +119,14 @@ public class Linkman extends Model<Linkman> {
 
     @Override
     public String toString() {
-        return "Linkman{" +
+        return "ContactRecord{" +
         "id=" + id +
-        ", name=" + name +
-        ", sex=" + sex +
-        ", position=" + position +
+        ", time=" + time +
+        ", eventCount=" + eventCount +
+        ", opsition=" + opsition +
         ", telephone=" + telephone +
-        ", phone=" + phone +
+        ", mobiephone=" + mobiephone +
         ", comment=" + comment +
-        ", chanceid=" + chanceid +
         "}";
     }
 }

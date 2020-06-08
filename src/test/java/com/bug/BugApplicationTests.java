@@ -10,6 +10,10 @@ class BugApplicationTests {
 
     @Test
     void contextLoads() {
+//        new MyTest().test();
+//        MyTest t;
+//        t = new MyTest();
+//        t.test();
 
     }
 

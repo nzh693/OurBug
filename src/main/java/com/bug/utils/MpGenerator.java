@@ -47,7 +47,8 @@ public class MpGenerator {
         StrategyConfig strategy = new StrategyConfig();
         strategy.setNaming(NamingStrategy.underline_to_camel);
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
-        strategy.setInclude("users", "linkman", "sale_chance"); // 需要生成的表
+        strategy.setInclude("users", "linkman", "sale_chance", "admin", "buy_product", "contact_record", "customer_plan", "event"
+            , "service", "service_back", "warn_lost"); // 需要生成的表
         mpg.setStrategy(strategy);
  
         // 包配置
