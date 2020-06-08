@@ -1,7 +1,6 @@
-package com.bug.conroller;
+package com.bug.controller;
 
 import com.bug.service.IUserService;
-import com.bug.service.UserServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

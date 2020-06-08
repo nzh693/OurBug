@@ -6,19 +6,19 @@ spring:
     cache: false
   thymeleaf:
     cache: true
-  security:
-    basic:
-      enabled: false
-  management:
-    security:
-      enabled: false
+#  security:
+#    basic:
+#      enabled: false
+#  management:
+#    security:
+#      enabled: false
   datasource:
     username: nzh
     password: 123456
     url: jdbc:mysql://193.112.195.243:3306/crmmangement?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSourceC3P0Adapter
-    initialSize: 5
-    minldle: 5
-    maxWait: 60000
-    maxActive: 20
+#    initialSize: 5
+#    minldle: 5
+#    maxWait: 60000
+#    maxActive: 20
