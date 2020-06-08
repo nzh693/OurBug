@@ -116,7 +116,7 @@
         </dependency>
 
 
-        <!--安德鲁连接池-->
+        <!--德鲁伊连接池-->
         <!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
         <dependency>
             <groupId>com.alibaba</groupId>
