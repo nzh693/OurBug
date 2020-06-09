@@ -59,6 +59,11 @@ public class WarnLost extends Model<WarnLost> {
      */
     private String comment;
 
+    /**
+     * 客户名称
+     */
+    private String cuname;
+
 
     public Integer getId() {
         return id;
@@ -124,6 +129,14 @@ public class WarnLost extends Model<WarnLost> {
         this.comment = comment;
     }
 
+    public String getCuname() {
+        return cuname;
+    }
+
+    public void setCuname(String cuname) {
+        this.cuname = cuname;
+    }
+
     @Override
     protected Serializable pkVal() {
         return this.id;
@@ -140,6 +153,7 @@ public class WarnLost extends Model<WarnLost> {
         ", measure=" + measure +
         ", lostReason=" + lostReason +
         ", comment=" + comment +
+        ", cuname=" + cuname +
         "}";
     }
 }

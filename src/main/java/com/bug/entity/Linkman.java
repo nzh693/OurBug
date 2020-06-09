@@ -58,6 +58,11 @@ public class Linkman extends Model<Linkman> {
      */
     private Integer chanceid;
 
+    /**
+     * 客户id
+     */
+    private Integer customerid;
+
 
     public Integer getId() {
         return id;
@@ -123,6 +128,14 @@ public class Linkman extends Model<Linkman> {
         this.chanceid = chanceid;
     }
 
+    public Integer getCustomerid() {
+        return customerid;
+    }
+
+    public void setCustomerid(Integer customerid) {
+        this.customerid = customerid;
+    }
+
     @Override
     protected Serializable pkVal() {
         return this.id;
@@ -139,6 +152,7 @@ public class Linkman extends Model<Linkman> {
         ", phone=" + phone +
         ", comment=" + comment +
         ", chanceid=" + chanceid +
+        ", customerid=" + customerid +
         "}";
     }
 }
