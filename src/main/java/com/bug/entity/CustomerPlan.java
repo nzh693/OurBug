@@ -3,6 +3,7 @@ package com.bug.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
+import java.time.LocalDateTime;
 import java.io.Serializable;
 
 /**
@@ -11,7 +12,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author Liewona
- * @since 2020-06-08
+ * @since 2020-06-09
  */
 public class CustomerPlan extends Model<CustomerPlan> {
 
@@ -31,7 +32,7 @@ public class CustomerPlan extends Model<CustomerPlan> {
     /**
      * 开发日期(xxxx-xx-xx)
      */
-    private String date;
+    private LocalDateTime date;
 
     /**
      * 内容
@@ -55,11 +56,11 @@ public class CustomerPlan extends Model<CustomerPlan> {
         this.chanceid = chanceid;
     }
 
-    public String getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

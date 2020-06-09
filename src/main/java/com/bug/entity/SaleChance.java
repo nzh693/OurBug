@@ -3,6 +3,7 @@ package com.bug.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
+import java.time.LocalDateTime;
 import java.io.Serializable;
 
 /**
@@ -11,7 +12,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author Liewona
- * @since 2020-06-08
+ * @since 2020-06-09
  */
 public class SaleChance extends Model<SaleChance> {
 
@@ -59,24 +60,24 @@ public class SaleChance extends Model<SaleChance> {
     private Integer createUserid;
 
     /**
-     * 创建时间
-     */
-    private String time;
-
-    /**
-     * 指派给
+     * 客户经理id
      */
     private Integer userid;
 
     /**
      * 指派时间
      */
-    private String assginTime;
+    private LocalDateTime assginTime;
 
     /**
      * 机会状态：0：未分派；1：已分派；2：开发成功；3：开发失败
      */
     private Integer state;
+
+    /**
+     * 创建时间
+     */
+    private LocalDateTime createTime;
 
 
     public Integer getId() {
@@ -143,14 +144,6 @@ public class SaleChance extends Model<SaleChance> {
         this.createUserid = createUserid;
     }
 
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
     public Integer getUserid() {
         return userid;
     }
@@ -159,11 +152,11 @@ public class SaleChance extends Model<SaleChance> {
         this.userid = userid;
     }
 
-    public String getAssginTime() {
+    public LocalDateTime getAssginTime() {
         return assginTime;
     }
 
-    public void setAssginTime(String assginTime) {
+    public void setAssginTime(LocalDateTime assginTime) {
         this.assginTime = assginTime;
     }
 
@@ -173,6 +166,14 @@ public class SaleChance extends Model<SaleChance> {
 
     public void setState(Integer state) {
         this.state = state;
+    }
+
+    public LocalDateTime getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
     }
 
     @Override
@@ -191,10 +192,10 @@ public class SaleChance extends Model<SaleChance> {
         ", schema=" + schema +
         ", desc=" + desc +
         ", createUserid=" + createUserid +
-        ", time=" + time +
         ", userid=" + userid +
         ", assginTime=" + assginTime +
         ", state=" + state +
+        ", createTime=" + createTime +
         "}";
     }
 }
