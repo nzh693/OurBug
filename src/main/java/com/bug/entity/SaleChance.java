@@ -1,200 +1,68 @@
 package com.bug.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
+import java.util.Date;
 
 /**
- * <p>
- * 
- * </p>
- *
- * @author Liewona
- * @since 2020-06-08
+ * @ClassName SaleChance
+ * @Description 销售机会Pojo
+ * @Author 柳成荫
+ * @Date 2020/6/9
  */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ApiModel(value = "SaleChance对象",description = "销售机会对象")
 public class SaleChance extends Model<SaleChance> {
 
     private static final long serialVersionUID=1L;
 
-    /**
-     * 机会id
-     */
+    @ApiModelProperty(value = "销售机会ID",name = "id",example = "1")
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    /**
-     * 客户姓名
-     */
+    @ApiModelProperty(value = "客户姓名",name = "customerName",example = "赵子龙")
     private String customerName;
 
-    /**
-     * 机会来源
-     */
+    @ApiModelProperty(value = "机会来源",name = "chanceFrom",example = "新的方式去提供产品")
     private String chanceFrom;
 
-    /**
-     * 联系电话
-     */
+    @ApiModelProperty(value = "联系电话",name = "telephone",example = "15310997468")
     private String telephone;
 
-    /**
-     * 成功几率(%)
-     */
+    @ApiModelProperty(value = "成功几率(%)",name = "successRate",example = "55")
     private Integer successRate;
 
-    /**
-     * 概要
-     */
-    private String schema;
+    @ApiModelProperty(value = "概要",name = "summary",example = "这个客户有点东西")
+    private String summary;
 
-    /**
-     * 机会描述
-     */
-    private String desc;
+    @ApiModelProperty(value = "机会描述",name = "description",example = "这是机会描述，这个机会难得")
+    private String description;
 
-    /**
-     * 创建人
-     */
+    @ApiModelProperty(value = "创建人id",name = "createUserid",example = "2")
     private Integer createUserid;
 
-    /**
-     * 创建时间
-     */
-    private String time;
+    @TableField(fill = FieldFill.INSERT)   // 插入时修改
+    @ApiModelProperty(value = "创建时间",name = "createTime",example = "2020-06-06 09:15:29")
+    private Date createTime;
 
-    /**
-     * 指派给
-     */
+    @ApiModelProperty(value = "被指派的客户经理id",name = "userid",example = "3")
     private Integer userid;
 
-    /**
-     * 指派时间
-     */
-    private String assginTime;
+    @ApiModelProperty(value = "指派时间",name = "assginTime",example = "2020-06-06 09:15:29")
+    private Date assginTime;
 
-    /**
-     * 机会状态：0：未分派；1：已分派；2：开发成功；3：开发失败
-     */
+    @ApiModelProperty(value = "机会状态码",name = "state",example = "0：未分派；1：已分派；2：开发成功；3：开发失败")
     private Integer state;
-
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
-    public String getChanceFrom() {
-        return chanceFrom;
-    }
-
-    public void setChanceFrom(String chanceFrom) {
-        this.chanceFrom = chanceFrom;
-    }
-
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
-
-    public Integer getSuccessRate() {
-        return successRate;
-    }
-
-    public void setSuccessRate(Integer successRate) {
-        this.successRate = successRate;
-    }
-
-    public String getSchema() {
-        return schema;
-    }
-
-    public void setSchema(String schema) {
-        this.schema = schema;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
-
-    public Integer getCreateUserid() {
-        return createUserid;
-    }
-
-    public void setCreateUserid(Integer createUserid) {
-        this.createUserid = createUserid;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public Integer getUserid() {
-        return userid;
-    }
-
-    public void setUserid(Integer userid) {
-        this.userid = userid;
-    }
-
-    public String getAssginTime() {
-        return assginTime;
-    }
-
-    public void setAssginTime(String assginTime) {
-        this.assginTime = assginTime;
-    }
-
-    public Integer getState() {
-        return state;
-    }
-
-    public void setState(Integer state) {
-        this.state = state;
-    }
-
-    @Override
-    protected Serializable pkVal() {
-        return this.id;
-    }
-
-    @Override
-    public String toString() {
-        return "SaleChance{" +
-        "id=" + id +
-        ", customerName=" + customerName +
-        ", chanceFrom=" + chanceFrom +
-        ", telephone=" + telephone +
-        ", successRate=" + successRate +
-        ", schema=" + schema +
-        ", desc=" + desc +
-        ", createUserid=" + createUserid +
-        ", time=" + time +
-        ", userid=" + userid +
-        ", assginTime=" + assginTime +
-        ", state=" + state +
-        "}";
-    }
 }
