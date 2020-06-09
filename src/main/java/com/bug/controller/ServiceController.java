@@ -1,6 +1,7 @@
 package com.bug.controller;
 
 
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;
@@ -13,9 +14,11 @@ import org.springframework.stereotype.Controller;
  * @author Liewona
  * @since 2020-06-08
  */
+@Api("service")
 @Controller
-@RequestMapping("/service")
+@RequestMapping("/api/v1")
 public class ServiceController {
+
 
 }
 

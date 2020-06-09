@@ -1,6 +1,6 @@
 package com.bug.mapper;
 
-import com.bug.entity.Service;
+import com.bug.entity.Services;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author Liewona
  * @since 2020-06-08
  */
-public interface ServiceMapper extends BaseMapper<Service> {
+public interface ServiceMapper extends BaseMapper<Services> {
 
 }

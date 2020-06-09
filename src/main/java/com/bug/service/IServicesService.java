@@ -1,6 +1,6 @@
 package com.bug.service;
 
-import com.bug.entity.Service;
+import com.bug.entity.Services;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author Liewona
  * @since 2020-06-08
  */
-public interface IServiceService extends IService<Service> {
+public interface IServicesService extends IService<Services> {
 
 }

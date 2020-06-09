@@ -13,7 +13,7 @@ import java.io.Serializable;
  * @author Liewona
  * @since 2020-06-08
  */
-public class Service extends Model<Service> {
+public class Services extends Model<Services> {
 
     private static final long serialVersionUID=1L;
 
