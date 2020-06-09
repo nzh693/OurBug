@@ -1,6 +1,5 @@
 package com.bug;
 
-import com.bug.enums.ServiceType;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -15,8 +14,6 @@ class BugApplicationTests {
 //        MyTest t;
 //        t = new MyTest();
 //        t.test();
-
-        System.out.println(ServiceType.CONSULT.getValue());
     }
 
 

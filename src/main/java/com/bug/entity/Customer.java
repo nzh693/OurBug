@@ -44,9 +44,14 @@ public class Customer extends Model<Customer> {
     private String telephone;
 
     /**
-     * 客户等级
+     * 客户等级:战略合作伙伴、合作伙伴、大客户、重点开发客户、普通客户、VIP客户。
      */
     private String level;
+
+    /**
+     * 客户状态：1：正常；0：已流失；
+     */
+    private String state;
 
 
     public Integer getId() {
@@ -97,6 +102,14 @@ public class Customer extends Model<Customer> {
         this.level = level;
     }
 
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
     @Override
     protected Serializable pkVal() {
         return this.id;
@@ -111,6 +124,7 @@ public class Customer extends Model<Customer> {
         ", addr=" + addr +
         ", telephone=" + telephone +
         ", level=" + level +
+        ", state=" + state +
         "}";
     }
 }
