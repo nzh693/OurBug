@@ -53,7 +53,7 @@ public class LinkmanController {
             data.add("没有数据了");
             result.setCode(1);
             result.setData(data);//填充分页数据
-            result.setCount(0L);
+            result.setCount(0L);//test
         }
         return JSON.toJSONString(result);
     }
