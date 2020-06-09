@@ -2,6 +2,7 @@ package com.bug.service;
 
 import com.bug.entity.SaleChance;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.bug.vo.ChanceAndUserVo;
 import com.bug.vo.ResponseResult;
 
 import java.util.List;
@@ -27,4 +28,10 @@ public interface ISaleChanceService extends IService<SaleChance> {
      * @return 数据集合
      */
     ResponseResult<List<SaleChance>> getSaleChanceByPage(Integer page, Integer limit, String customerName, Integer state);
+
+    /**
+     * 获取销售机会和所有客户经理
+     * @param id 销售机会id
+     */
+    ResponseResult<ChanceAndUserVo> getSaleChanceAndUser(Integer id);
 }

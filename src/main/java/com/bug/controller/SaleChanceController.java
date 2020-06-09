@@ -3,6 +3,7 @@ package com.bug.controller;
 
 import com.bug.entity.SaleChance;
 import com.bug.service.ISaleChanceService;
+import com.bug.vo.ChanceAndUserVo;
 import com.bug.vo.ResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
 
@@ -55,10 +57,16 @@ public class SaleChanceController {
         return responseResult;
     }
 
+    /**
+     * 新增销售机会
+     * @param saleChance 销售机会
+     */
     @ApiOperation(value = "新增销售机会",notes = "新增一个销售机会")
     @ApiImplicitParam(name = "saleChance",value = "销售机会")
     @PostMapping("/addSaleChance")
-    public SaleChance addSaleChance(@RequestBody SaleChance saleChance){
+    public SaleChance addSaleChance(@RequestBody SaleChance saleChance, HttpServletRequest request){
+//        request.getSession().setAttribute("xjs","熊劲松");
+//        String xjs = (String) request.getSession().getAttribute("xjs");
         log.info("新增销售机会！");
         //TODO： 获取登录的用户，这里固定写死
         saleChance.setCreateUserid(1);
@@ -69,5 +77,34 @@ public class SaleChanceController {
         return saleChance;
     }
 
+    /**
+     * 指派销售机会
+     * @param saleChance 销售机会
+     */
+    @ApiOperation(value = "指派销售机会",notes = "将销售机会指派给一个客户经理")
+    @ApiImplicitParam(name = "saleChance",value = "销售机会")
+    @PutMapping("/assignedUser")
+    public SaleChance assignedUser(@RequestBody SaleChance saleChance){
+        System.out.println("123456PUT");
+        log.info("修改/指派！");
+        if(saleChance.getId() == null){  // id不存在不是修改
+            return null;
+        }else{
+            saleChanceService.updateById(saleChance);
+            return null;
+        }
+    }
+
+    /**
+     * 获取销售机会和所有客户经理
+     * @param id 销售机会id
+     */
+    @ApiOperation(value = "获取销售机会信息",notes = "获取销售机会和所有客户经理")
+    @ApiImplicitParam(name = "id",value = "销售机会id")
+    @GetMapping("/getSaleChanceAndUser")
+    public ResponseResult<ChanceAndUserVo> getSaleChanceAndUser(@RequestParam("id") Integer id){
+        ResponseResult<ChanceAndUserVo> responseResult = saleChanceService.getSaleChanceAndUser(id);
+        return responseResult;
+    }
 }
 

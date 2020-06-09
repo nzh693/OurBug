@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -23,6 +24,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @ApiModel(value = "SaleChance对象",description = "销售机会对象")
 public class SaleChance extends Model<SaleChance> {
 

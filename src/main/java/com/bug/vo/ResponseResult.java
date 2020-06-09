@@ -18,4 +18,8 @@ public class ResponseResult<T> {
     private String msg;     // 结果消息
     private Integer count;  // 记录数
     private T data;         // 数据
+
+    public ResponseResult(T data){
+        this(0,"成功!",0,data);
+    }
 }
