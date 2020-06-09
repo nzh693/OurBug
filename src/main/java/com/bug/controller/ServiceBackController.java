@@ -1,6 +1,7 @@
 package com.bug.controller;
 
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;
@@ -14,8 +15,12 @@ import org.springframework.stereotype.Controller;
  * @since 2020-06-09
  */
 @Controller
-@RequestMapping("/serviceBack")
+@RequestMapping("/api/v1/serviceBack")
 public class ServiceBackController {
 
+    @GetMapping("")
+    public void getDisposeService() {
+
+    }
 }
 

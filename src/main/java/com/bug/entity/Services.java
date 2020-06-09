@@ -3,8 +3,8 @@ package com.bug.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -37,7 +37,7 @@ public class Services extends Model<Services> {
     /**
      * 创建时间
      */
-    private LocalDateTime time;
+    private LocalDateTime createTime;
 
     /**
      * 服务被分配
@@ -58,6 +58,11 @@ public class Services extends Model<Services> {
      * 服务处理过程
      */
     private String serviceDispose;
+
+    /**
+     * 分配时间
+     */
+    private LocalDateTime allocationTime;
 
 
     public Integer getId() {
@@ -84,12 +89,12 @@ public class Services extends Model<Services> {
         this.userid = userid;
     }
 
-    public LocalDateTime getTime() {
-        return time;
+    public LocalDateTime getCreateTime() {
+        return createTime;
     }
 
-    public void setTime(LocalDateTime time) {
-        this.time = time;
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
     }
 
     public Integer getDealUserid() {
@@ -124,6 +129,14 @@ public class Services extends Model<Services> {
         this.serviceDispose = serviceDispose;
     }
 
+    public LocalDateTime getAllocationTime() {
+        return allocationTime;
+    }
+
+    public void setAllocationTime(LocalDateTime allocationTime) {
+        this.allocationTime = allocationTime;
+    }
+
     @Override
     protected Serializable pkVal() {
         return this.id;
@@ -135,11 +148,12 @@ public class Services extends Model<Services> {
         "id=" + id +
         ", type=" + type +
         ", userid=" + userid +
-        ", time=" + time +
+        ", createTime=" + createTime +
         ", dealUserid=" + dealUserid +
         ", state=" + state +
         ", serviceContent=" + serviceContent +
         ", serviceDispose=" + serviceDispose +
+        ", allocationTime=" + allocationTime +
         "}";
     }
 }

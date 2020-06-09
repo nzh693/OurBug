@@ -56,7 +56,7 @@ public class Users extends Model<Users> {
     /**
      * 客户经理：1，销售主管：2，高管：3，系统管理员：4
      */
-    private Integer limit;
+    private Integer limited;
 
 
     public Integer getId() {
@@ -115,12 +115,12 @@ public class Users extends Model<Users> {
         this.position = position;
     }
 
-    public Integer getLimit() {
-        return limit;
+    public Integer getLimited() {
+        return limited;
     }
 
-    public void setLimit(Integer limit) {
-        this.limit = limit;
+    public void setLimited(Integer limited) {
+        this.limited = limited;
     }
 
     @Override
@@ -138,7 +138,7 @@ public class Users extends Model<Users> {
         ", phone=" + phone +
         ", sex=" + sex +
         ", position=" + position +
-        ", limit=" + limit +
+        ", limit=" + limited +
         "}";
     }
 }

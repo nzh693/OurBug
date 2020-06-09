@@ -5,7 +5,6 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.Method;
 import java.util.Arrays;
 
 /**
@@ -52,12 +51,12 @@ public class AspectTest {
      * @param joinPoint
      * @param re
      */
-    @AfterReturning(value = "pointCount()",returning = "re", argNames = "joinPoint,re")
-    public void AfterReturning(JoinPoint joinPoint, Object re){
-        System.out.println(joinPoint.getSignature().toShortString());
-
-        System.out.println("--------后置返回通知 返回--------"+re);
-    }
+//    @AfterReturning(value = "pointCount()",returning = "re", argNames = "joinPoint,re")
+//    public void AfterReturning(JoinPoint joinPoint, Object re){
+//        System.out.println(joinPoint.getSignature().toShortString());
+//
+//        System.out.println("--------后置返回通知 返回--------"+re);
+//    }
 
     /**
      * 后置异常通知
