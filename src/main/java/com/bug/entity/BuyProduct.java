@@ -3,6 +3,7 @@ package com.bug.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
+import java.time.LocalDateTime;
 import java.io.Serializable;
 
 /**
@@ -11,7 +12,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author Liewona
- * @since 2020-06-08
+ * @since 2020-06-09
  */
 public class BuyProduct extends Model<BuyProduct> {
 
@@ -26,7 +27,7 @@ public class BuyProduct extends Model<BuyProduct> {
     /**
      * 客户ID
      */
-    private Integer userid;
+    private Integer customerid;
 
     /**
      * 产品ID
@@ -36,12 +37,12 @@ public class BuyProduct extends Model<BuyProduct> {
     /**
      * 交易时间
      */
-    private String time;
+    private LocalDateTime time;
 
     /**
      * 交易状态
      */
-    private String state;
+    private Integer state;
 
     /**
      * 备注
@@ -57,12 +58,12 @@ public class BuyProduct extends Model<BuyProduct> {
         this.id = id;
     }
 
-    public Integer getUserid() {
-        return userid;
+    public Integer getCustomerid() {
+        return customerid;
     }
 
-    public void setUserid(Integer userid) {
-        this.userid = userid;
+    public void setCustomerid(Integer customerid) {
+        this.customerid = customerid;
     }
 
     public Integer getProductid() {
@@ -73,19 +74,19 @@ public class BuyProduct extends Model<BuyProduct> {
         this.productid = productid;
     }
 
-    public String getTime() {
+    public LocalDateTime getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(LocalDateTime time) {
         this.time = time;
     }
 
-    public String getState() {
+    public Integer getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(Integer state) {
         this.state = state;
     }
 
@@ -106,7 +107,7 @@ public class BuyProduct extends Model<BuyProduct> {
     public String toString() {
         return "BuyProduct{" +
         "id=" + id +
-        ", userid=" + userid +
+        ", customerid=" + customerid +
         ", productid=" + productid +
         ", time=" + time +
         ", state=" + state +

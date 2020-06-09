@@ -3,6 +3,7 @@ package com.bug.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
+import java.time.LocalDateTime;
 import java.io.Serializable;
 
 /**
@@ -36,7 +37,7 @@ public class Services extends Model<Services> {
     /**
      * 创建时间
      */
-    private String time;
+    private LocalDateTime time;
 
     /**
      * 服务被分配
@@ -83,11 +84,11 @@ public class Services extends Model<Services> {
         this.userid = userid;
     }
 
-    public String getTime() {
+    public LocalDateTime getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(LocalDateTime time) {
         this.time = time;
     }
 

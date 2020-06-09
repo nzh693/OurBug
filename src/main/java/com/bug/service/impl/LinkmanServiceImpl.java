@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author Liewona
- * @since 2020-06-08
+ * @since 2020-06-09
  */
 @Service
 public class LinkmanServiceImpl extends ServiceImpl<LinkmanMapper, Linkman> implements ILinkmanService {

@@ -27,7 +27,7 @@ public class MpGenerator {
         GlobalConfig gc = new GlobalConfig();
         gc.setAuthor("Liewona");
         gc.setOutputDir("C:\\Users\\VULCAN\\Desktop\\training\\bug\\src\\main\\java"); //对应项目的src/main/java目录在磁盘上的真实路径
-        gc.setFileOverride(false);// 是否覆盖同名文件，默认是false
+        gc.setFileOverride(true);// 是否覆盖同名文件，默认是false
         gc.setActiveRecord(true);// 不需要ActiveRecord特性的请改为false
         gc.setEnableCache(false);// XML 二级缓存
         gc.setBaseResultMap(true);// XML ResultMap
@@ -47,9 +47,9 @@ public class MpGenerator {
         StrategyConfig strategy = new StrategyConfig();
         strategy.setNaming(NamingStrategy.underline_to_camel);
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
-//        strategy.setInclude("users", "linkman", "sale_chance", "admin", "buy_product", "contact_record", "customer_plan", "event"
-//            , "service", "service_back", "warn_lost"); // 需要生成的表ct", "contact_record", "customer_plan", "event"
-        strategy.setInclude("customer");
+        strategy.setInclude("users", "linkman", "sale_chance", "admin", "buy_product", "contact_record", "customer_plan", "event"
+            , "services", "service_back", "warn_lost", "customer"); // 需要生成的表ct", "contact_record", "customer_plan", "event"
+//        strategy.setInclude("customer");
         mpg.setStrategy(strategy);
  
         // 包配置

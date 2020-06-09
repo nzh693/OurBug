@@ -3,6 +3,7 @@ package com.bug.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
+import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 
@@ -12,7 +13,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author Liewona
- * @since 2020-06-08
+ * @since 2020-06-09
  */
 public class ContactRecord extends Model<ContactRecord> {
 
@@ -27,7 +28,7 @@ public class ContactRecord extends Model<ContactRecord> {
     /**
      * 记录上传时间
      */
-    private String time;
+    private LocalDateTime time;
 
     /**
      * 事件
@@ -38,7 +39,7 @@ public class ContactRecord extends Model<ContactRecord> {
     /**
      * 职位
      */
-    private String opsition;
+    private String position;
 
     /**
      * 办公电话
@@ -64,11 +65,11 @@ public class ContactRecord extends Model<ContactRecord> {
         this.id = id;
     }
 
-    public String getTime() {
+    public LocalDateTime getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(LocalDateTime time) {
         this.time = time;
     }
 
@@ -80,12 +81,12 @@ public class ContactRecord extends Model<ContactRecord> {
         this.eventCount = eventCount;
     }
 
-    public String getOpsition() {
-        return opsition;
+    public String getPosition() {
+        return position;
     }
 
-    public void setOpsition(String opsition) {
-        this.opsition = opsition;
+    public void setPosition(String position) {
+        this.position = position;
     }
 
     public String getTelephone() {
@@ -123,7 +124,7 @@ public class ContactRecord extends Model<ContactRecord> {
         "id=" + id +
         ", time=" + time +
         ", eventCount=" + eventCount +
-        ", opsition=" + opsition +
+        ", position=" + position +
         ", telephone=" + telephone +
         ", mobiephone=" + mobiephone +
         ", comment=" + comment +

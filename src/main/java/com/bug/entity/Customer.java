@@ -51,7 +51,7 @@ public class Customer extends Model<Customer> {
     /**
      * 客户状态：1：正常；0：已流失；
      */
-    private String state;
+    private Integer state;
 
 
     public Integer getId() {
@@ -102,11 +102,11 @@ public class Customer extends Model<Customer> {
         this.level = level;
     }
 
-    public String getState() {
+    public Integer getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(Integer state) {
         this.state = state;
     }
 

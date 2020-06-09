@@ -6,7 +6,7 @@ import java.util.List;
  *   Author = Liewona
  *   Date = 2020/6/8 16:54
  */
-public class ResultData {
+public class ResultByList {
 
     private Integer code;
     private String msg;
