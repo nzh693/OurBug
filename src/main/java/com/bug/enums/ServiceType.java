@@ -10,6 +10,13 @@ public enum ServiceType {
     ADVISE("建议")
     ;
 
-    ServiceType(String 资讯) {
+    private String value;
+
+    ServiceType(String value) {
+        this.value = value;
+    }
+
+    public String getValue() {
+        return value;
     }
 }

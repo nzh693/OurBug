@@ -1,8 +1,8 @@
 package com.bug.service.impl;
 
-import com.bug.entity.Services;
-import com.bug.mapper.ServicesMapper;
-import com.bug.service.IServicesService;
+import com.bug.entity.Customer;
+import com.bug.mapper.CustomerMapper;
+import com.bug.service.ICustomerService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +15,6 @@ import org.springframework.stereotype.Service;
  * @since 2020-06-09
  */
 @Service
-public class ServicesServiceImpl extends ServiceImpl<ServicesMapper, Services> implements IServicesService {
+public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> implements ICustomerService {
 
 }

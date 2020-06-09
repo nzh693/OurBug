@@ -11,7 +11,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author Liewona
- * @since 2020-06-08
+ * @since 2020-06-09
  */
 public class Services extends Model<Services> {
 
@@ -47,6 +47,16 @@ public class Services extends Model<Services> {
      * 0：未分配；1：已分配
      */
     private Integer state;
+
+    /**
+     * 服务请求内容
+     */
+    private String serviceContent;
+
+    /**
+     * 服务处理过程
+     */
+    private String serviceDispose;
 
 
     public Integer getId() {
@@ -97,6 +107,22 @@ public class Services extends Model<Services> {
         this.state = state;
     }
 
+    public String getServiceContent() {
+        return serviceContent;
+    }
+
+    public void setServiceContent(String serviceContent) {
+        this.serviceContent = serviceContent;
+    }
+
+    public String getServiceDispose() {
+        return serviceDispose;
+    }
+
+    public void setServiceDispose(String serviceDispose) {
+        this.serviceDispose = serviceDispose;
+    }
+
     @Override
     protected Serializable pkVal() {
         return this.id;
@@ -104,13 +130,15 @@ public class Services extends Model<Services> {
 
     @Override
     public String toString() {
-        return "Service{" +
+        return "Services{" +
         "id=" + id +
         ", type=" + type +
         ", userid=" + userid +
         ", time=" + time +
         ", dealUserid=" + dealUserid +
         ", state=" + state +
+        ", serviceContent=" + serviceContent +
+        ", serviceDispose=" + serviceDispose +
         "}";
     }
 }
