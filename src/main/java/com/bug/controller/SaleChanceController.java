@@ -77,23 +77,6 @@ public class SaleChanceController {
         return saleChance;
     }
 
-    /**
-     * 指派销售机会
-     * @param saleChance 销售机会
-     */
-    @ApiOperation(value = "指派销售机会",notes = "将销售机会指派给一个客户经理")
-    @ApiImplicitParam(name = "saleChance",value = "销售机会")
-    @PutMapping("/assignedUser")
-    public SaleChance assignedUser(@RequestBody SaleChance saleChance){
-        System.out.println("123456PUT");
-        log.info("修改/指派！");
-        if(saleChance.getId() == null){  // id不存在不是修改
-            return null;
-        }else{
-            saleChanceService.updateById(saleChance);
-            return null;
-        }
-    }
 
     /**
      * 获取销售机会和所有客户经理
@@ -106,5 +89,37 @@ public class SaleChanceController {
         ResponseResult<ChanceAndUserVo> responseResult = saleChanceService.getSaleChanceAndUser(id);
         return responseResult;
     }
+
+    /**
+     * 指派/修改 - 销售机会
+     * @param saleChance 销售机会
+     */
+    @ApiOperation(value = "指派/修改销售机会",notes = "将销售机会指派给一个客户经理/修改销售机会")
+    @ApiImplicitParam(name = "saleChance",value = "销售机会")
+    @PutMapping("/updateSaleChance")
+    public SaleChance updateSaleChance(@RequestBody SaleChance saleChance){
+        log.info("修改/指派！");
+        if(saleChance.getId() == null){  // id不存在不是修改
+            return null;
+        }else{
+            saleChanceService.updateById(saleChance);
+            return saleChance;
+        }
+    }
+
+    /**
+     * 删除销售机会
+     * @param id 销售机会id
+     */
+    @ApiOperation(value = "删除销售机会",notes = "删除销售机会")
+    @ApiImplicitParam(name = "saleChance",value = "销售机会id")
+    @DeleteMapping("/deleteSaleChance")
+    public ResponseResult<String> deleteSaleChance(@RequestParam("id") Integer id){
+        saleChanceService.deleteSaleChance(id);
+        return null;
+    }
+
+
+
 }
 

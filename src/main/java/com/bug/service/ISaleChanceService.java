@@ -34,4 +34,6 @@ public interface ISaleChanceService extends IService<SaleChance> {
      * @param id 销售机会id
      */
     ResponseResult<ChanceAndUserVo> getSaleChanceAndUser(Integer id);
+
+    void deleteSaleChance(Integer id);
 }

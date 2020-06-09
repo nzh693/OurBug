@@ -68,10 +68,19 @@ public class SaleChanceServiceImpl extends ServiceImpl<SaleChanceMapper, SaleCha
     public ResponseResult<ChanceAndUserVo> getSaleChanceAndUser(Integer id) {
         SaleChance saleChance = baseMapper.selectById(id);
         QueryWrapper<Users> wrapper = new QueryWrapper<>();
-        wrapper.eq("limit",1);  // 只要客户经理
+        wrapper.eq("limited",1);  // 只要客户经理
         List<Users> users = usersService.list(wrapper);
         ChanceAndUserVo chanceAndUserVo = new ChanceAndUserVo(saleChance,users);
         ResponseResult<ChanceAndUserVo> responseResult = new ResponseResult<>(chanceAndUserVo);
         return responseResult;
+    }
+
+    @Override
+    public void deleteSaleChance(Integer id) {
+        SaleChance saleChance = baseMapper.selectById(id);
+        if(saleChance != null && saleChance.getState() == 1){
+            // 不存在则删除
+            baseMapper.deleteById(id);
+        }
     }
 }
