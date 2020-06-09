@@ -1,7 +1,9 @@
 package com.bug.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.MetaObject;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
@@ -11,6 +13,8 @@ import java.util.Date;
  * @Author 柳成荫
  * @Date 2020/6/9
  */
+@Slf4j
+@Component
 public class MyMetaObjectHandler implements MetaObjectHandler{
     @Override
     public void insertFill(MetaObject metaObject) {
@@ -19,6 +23,7 @@ public class MyMetaObjectHandler implements MetaObjectHandler{
          * 参数二：修改的值
          * 参数三：源对象
          */
+        log.info("自动填充创建时间---createTime");
         this.setFieldValByName("createTime",new Date(),metaObject);
 //        this.setFieldValByName("updateTime",new Date(),metaObject);
     }

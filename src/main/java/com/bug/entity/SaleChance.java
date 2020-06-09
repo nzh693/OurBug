@@ -32,14 +32,29 @@ public class SaleChance extends Model<SaleChance> {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
+    @ApiModelProperty(value = "客户id",name = "customerId",example = "1")
+    private Integer customerId;
+
     @ApiModelProperty(value = "客户姓名",name = "customerName",example = "赵子龙")
     private String customerName;
 
-    @ApiModelProperty(value = "机会来源",name = "chanceFrom",example = "新的方式去提供产品")
-    private String chanceFrom;
-
     @ApiModelProperty(value = "联系电话",name = "telephone",example = "15310997468")
     private String telephone;
+
+    @ApiModelProperty(value = "性别",name = "sex",example = "男")
+    private String sex;
+
+    @ApiModelProperty(value = "地址",name = "addr",example = "重庆市九龙坡区熊家小镇")
+    private String addr;
+
+    @ApiModelProperty(value = "客户登记",name = "level",example = "战略合作伙伴、合作伙伴、大客户、重点开发客户、普通客户、VIP客户")
+    private String level;
+
+    @ApiModelProperty(value = "机会状态码",name = "state",example = "1：未分派；2：已分派；3：开发成功；4：开发失败")
+    private Integer state;
+
+    @ApiModelProperty(value = "机会来源",name = "chanceFrom",example = "新的方式去提供产品")
+    private String chanceFrom;
 
     @ApiModelProperty(value = "成功几率(%)",name = "successRate",example = "55")
     private Integer successRate;
@@ -53,16 +68,19 @@ public class SaleChance extends Model<SaleChance> {
     @ApiModelProperty(value = "创建人id",name = "createUserid",example = "2")
     private Integer createUserid;
 
-    @TableField(fill = FieldFill.INSERT)   // 插入时修改
+    @ApiModelProperty(value = "创建人",name = "createUsername",example = "霍去病")
+    private String createUsername;
+
+//    @TableField(fill = FieldFill.INSERT)   // 插入时修改
     @ApiModelProperty(value = "创建时间",name = "createTime",example = "2020-06-06 09:15:29")
     private Date createTime;
 
     @ApiModelProperty(value = "被指派的客户经理id",name = "userid",example = "3")
     private Integer userid;
 
+    @ApiModelProperty(value = "被指派的客户经理",name = "username",example = "刘三刀")
+    private Integer username;
+
     @ApiModelProperty(value = "指派时间",name = "assginTime",example = "2020-06-06 09:15:29")
     private Date assginTime;
-
-    @ApiModelProperty(value = "机会状态码",name = "state",example = "0：未分派；1：已分派；2：开发成功；3：开发失败")
-    private Integer state;
 }

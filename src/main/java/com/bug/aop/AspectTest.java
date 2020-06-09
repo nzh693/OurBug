@@ -11,8 +11,8 @@ import java.util.Arrays;
 /**
  * 切面
  */
-@Component
-@Aspect
+//@Component
+//@Aspect
 public class AspectTest {
 
     /**
