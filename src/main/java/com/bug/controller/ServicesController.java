@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <p>
@@ -46,7 +47,7 @@ public class ServicesController {
      * @param pageLimit 每页大小
      * @return 返回查询列表
      */
-    @ApiOperation(value = "查询所有的服务。可以分页")
+    @ApiOperation(value = "查询所有的服务,分页")
     @GetMapping("services")
     public @ResponseBody ResultByList getServices(
             @ApiParam(value = "要查询的页码",required = true)
@@ -55,16 +56,8 @@ public class ServicesController {
             @RequestParam(defaultValue = "10") Integer pageLimit//limit每页的行数，默认为10
     ) {
         ResultByList rst = new ResultByList();
-//        Services s = new Services();
-//        s.setType(1);
-//        s.setTime(LocalDateTime.now());
-//        s.setUserid(123);
-//        s.setTime(LocalDateTime.now());
-//        services.save(s);
-
         try {
             QueryWrapper<Services> qw = new QueryWrapper<>();
-//            qw.eq("state", s.getState());
             Page<Services> pageCustomer = services.page(new Page<Services>(page,pageLimit), qw);
             rst.setData(pageCustomer.getRecords());
             rst.setCount(pageCustomer.getTotal());
@@ -75,6 +68,21 @@ public class ServicesController {
             rst.setCode(1);
         }
         return rst;
+    }
+
+
+    /**
+     * 查询所有的服务记录
+     */
+    @ApiOperation("获取所有的服务记录，用于统计报表")
+    @GetMapping("as")
+    public void getAll() {
+        ResultByList rst = new ResultByList();
+        List<Services> list = services.list();
+        rst.setData(list);
+        rst.setCount((long) list.size());
+        rst.setMsg("查询成功");
+        rst.setCode(0);
     }
 
     /**

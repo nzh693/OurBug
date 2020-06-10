@@ -30,7 +30,7 @@ public class Services extends Model<Services> {
     private Integer id;
 
     /**
-     * 服务类型：1：咨询 2：投诉 3：建议
+     * 服务类型：0：咨询 1：投诉 2：建议
      */
     @ApiModelProperty("服务类型")
     private Integer type;
