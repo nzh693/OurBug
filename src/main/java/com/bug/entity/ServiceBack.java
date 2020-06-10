@@ -87,6 +87,14 @@ public class ServiceBack extends Model<ServiceBack> {
         this.comment = comment;
     }
 
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
+    }
+
     @Override
     protected Serializable pkVal() {
         return this.id;
