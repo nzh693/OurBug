@@ -12,7 +12,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author Liewona
- * @since 2020-06-09
+ * @since 2020-06-10
  */
 public class Event extends Model<Event> {
 
@@ -37,7 +37,7 @@ public class Event extends Model<Event> {
     /**
      * 概要
      */
-    private String schema;
+    private String sumary;
 
     /**
      * 详细信息
@@ -79,12 +79,12 @@ public class Event extends Model<Event> {
         this.place = place;
     }
 
-    public String getSchema() {
-        return schema;
+    public String getSumary() {
+        return sumary;
     }
 
-    public void setSchema(String schema) {
-        this.schema = schema;
+    public void setSumary(String sumary) {
+        this.sumary = sumary;
     }
 
     public String getDetail() {
@@ -122,7 +122,7 @@ public class Event extends Model<Event> {
         "id=" + id +
         ", time=" + time +
         ", place=" + place +
-        ", schema=" + schema +
+        ", sumary=" + sumary +
         ", detail=" + detail +
         ", comment=" + comment +
         ", recordId=" + recordId +

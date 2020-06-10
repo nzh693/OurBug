@@ -3,19 +3,27 @@ package com.bug.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.bug.entity.ContactRecord;
 import com.bug.entity.Customer;
 import com.bug.entity.Linkman;
 import com.bug.service.ICustomerService;
 import com.bug.service.ILinkmanService;
 import com.bug.utils.ResultByList;
+import javafx.scene.input.DataFormat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.spring.web.json.Json;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,24 +34,18 @@ import java.util.List;
  * @author Liewona
  * @since 2020-06-09
  */
-@Controller()
+@RestController
 @RequestMapping("api/v1/customer")
 public class CustomerController {
 
     @Autowired
     private ICustomerService customerService;
-
-
-
-
-
     /**
      * 客户状态正常：可编辑
      *
      * @param customer 客户
      * @return  返回编辑结果：成功或失败
      */
-    @ResponseBody
     @RequestMapping(path = "editCustomer")
     public String editCustomer(Customer customer){
         ResultByList result=new ResultByList();
@@ -59,6 +61,23 @@ public class CustomerController {
         result.setData(list);
         return JSON.toJSONString(result);
     }
+
+
+
+    @RequestMapping(path = "getAllCustomers",method = RequestMethod.GET)
+    public ResultByList getAllCustomers(){
+        ResultByList result=new ResultByList();
+        List<Customer> list=customerService.list();
+        result.setCode(0);
+        result.setMsg("返回所有的用户");
+        result.setCount(Long.valueOf(list.size()));
+        result.setData(list);
+        return result;
+    }
+
+
+
+
 
 
 

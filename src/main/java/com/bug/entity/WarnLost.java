@@ -12,7 +12,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author Liewona
- * @since 2020-06-09
+ * @since 2020-06-10
  */
 public class WarnLost extends Model<WarnLost> {
 
@@ -30,7 +30,7 @@ public class WarnLost extends Model<WarnLost> {
     private Integer userid;
 
     /**
-     * 客户ID
+     * 联系人ID
      */
     private Integer linkmanid;
 
@@ -40,9 +40,9 @@ public class WarnLost extends Model<WarnLost> {
     private LocalDateTime time;
 
     /**
-     * 交易状态
+     * 预警状态
      */
-    private String state;
+    private Integer state;
 
     /**
      * 措施
@@ -63,6 +63,11 @@ public class WarnLost extends Model<WarnLost> {
      * 客户名称
      */
     private String cuname;
+
+    /**
+     * 客户id
+     */
+    private Integer customerid;
 
 
     public Integer getId() {
@@ -97,11 +102,11 @@ public class WarnLost extends Model<WarnLost> {
         this.time = time;
     }
 
-    public String getState() {
+    public Integer getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(Integer state) {
         this.state = state;
     }
 
@@ -137,6 +142,14 @@ public class WarnLost extends Model<WarnLost> {
         this.cuname = cuname;
     }
 
+    public Integer getCustomerid() {
+        return customerid;
+    }
+
+    public void setCustomerid(Integer customerid) {
+        this.customerid = customerid;
+    }
+
     @Override
     protected Serializable pkVal() {
         return this.id;
@@ -154,6 +167,7 @@ public class WarnLost extends Model<WarnLost> {
         ", lostReason=" + lostReason +
         ", comment=" + comment +
         ", cuname=" + cuname +
+        ", customerid=" + customerid +
         "}";
     }
 }

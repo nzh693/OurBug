@@ -3,7 +3,6 @@ package com.bug.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 
@@ -13,7 +12,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author Liewona
- * @since 2020-06-09
+ * @since 2020-06-10
  */
 public class ContactRecord extends Model<ContactRecord> {
 
@@ -28,33 +27,28 @@ public class ContactRecord extends Model<ContactRecord> {
     /**
      * 记录上传时间
      */
-    private LocalDateTime time;
+    private String time;
 
     /**
      * 事件
      */
     @TableField("eventCount")
-    private String eventCount;
-
-    /**
-     * 职位
-     */
-    private String position;
-
-    /**
-     * 办公电话
-     */
-    private String telephone;
-
-    /**
-     * 移动电话
-     */
-    private String mobiephone;
+    private Integer eventCount;
 
     /**
      * 移动电话
      */
     private String comment;
+
+    /**
+     * 客户id
+     */
+    private Integer customerid;
+
+    /**
+     * 服务id
+     */
+    private Integer serviceid;
 
 
     public Integer getId() {
@@ -65,44 +59,20 @@ public class ContactRecord extends Model<ContactRecord> {
         this.id = id;
     }
 
-    public LocalDateTime getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(LocalDateTime time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
-    public String getEventCount() {
+    public Integer getEventCount() {
         return eventCount;
     }
 
-    public void setEventCount(String eventCount) {
+    public void setEventCount(Integer eventCount) {
         this.eventCount = eventCount;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
-
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
-
-    public String getMobiephone() {
-        return mobiephone;
-    }
-
-    public void setMobiephone(String mobiephone) {
-        this.mobiephone = mobiephone;
     }
 
     public String getComment() {
@@ -111,6 +81,22 @@ public class ContactRecord extends Model<ContactRecord> {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public Integer getCustomerid() {
+        return customerid;
+    }
+
+    public void setCustomerid(Integer customerid) {
+        this.customerid = customerid;
+    }
+
+    public Integer getServiceid() {
+        return serviceid;
+    }
+
+    public void setServiceid(Integer serviceid) {
+        this.serviceid = serviceid;
     }
 
     @Override
@@ -124,10 +110,9 @@ public class ContactRecord extends Model<ContactRecord> {
         "id=" + id +
         ", time=" + time +
         ", eventCount=" + eventCount +
-        ", position=" + position +
-        ", telephone=" + telephone +
-        ", mobiephone=" + mobiephone +
         ", comment=" + comment +
+        ", customerid=" + customerid +
+        ", serviceid=" + serviceid +
         "}";
     }
 }

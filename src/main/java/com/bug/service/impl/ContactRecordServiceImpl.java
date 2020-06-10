@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author Liewona
- * @since 2020-06-09
+ * @since 2020-06-10
  */
 @Service
 public class ContactRecordServiceImpl extends ServiceImpl<ContactRecordMapper, ContactRecord> implements IContactRecordService {
