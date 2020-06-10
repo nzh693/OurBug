@@ -3,6 +3,9 @@ package com.bug.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -14,6 +17,7 @@ import java.time.LocalDateTime;
  * @author Liewona
  * @since 2020-06-09
  */
+@ApiModel("服务")
 public class Services extends Model<Services> {
 
     private static final long serialVersionUID=1L;
@@ -21,47 +25,56 @@ public class Services extends Model<Services> {
     /**
      * 服务id
      */
+    @ApiModelProperty("服务id")
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     /**
      * 服务类型：1：咨询 2：投诉 3：建议
      */
+    @ApiModelProperty("服务类型")
     private Integer type;
 
     /**
      * 服务创建人
      */
+    @ApiModelProperty("服务创建人id")
     private Integer userid;
 
     /**
      * 创建时间
      */
+    @ApiModelProperty("创建时间")
     private LocalDateTime createTime;
 
     /**
      * 服务被分配
      */
+    @ApiModelProperty("服务分配到指定id")
     private Integer dealUserid;
 
     /**
-     * 0：未分配；1：已分配
+     * 0：未分配；1：已分配，2 已处理，3 已归档
      */
+    @ApiModelProperty("服务状态")
     private Integer state;
 
     /**
      * 服务请求内容
      */
+    @ApiModelProperty("服务请求内容")
     private String serviceContent;
 
     /**
      * 服务处理过程
      */
+    @ApiModelProperty("服务处理过程")
     private String serviceDispose;
 
     /**
      * 分配时间
      */
+    @ApiModelProperty("分配时间")
     private LocalDateTime allocationTime;
 
 
