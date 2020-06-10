@@ -2,7 +2,9 @@ package com.bug.service;
 
 import com.bug.entity.Customer;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.bug.entity.CustomerPlan;
 import com.bug.entity.Linkman;
+import com.bug.vo.ResponseResult;
 
 import java.util.List;
 
@@ -22,9 +24,5 @@ public interface ICustomerService extends IService<Customer> {
      * @return 客户
      */
     public Customer getCustomerById(Customer customer);
-
-
-
-
 
 }
