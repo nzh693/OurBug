@@ -18,7 +18,7 @@ import java.util.List;
  */
 public interface BuyProductMapper extends BaseMapper<BuyProduct> {
 
-   @Select("select * from buy_product t where  t.time>=#{time}")
-   public List<BuyProduct> selectNoBuy(String time);
+   @Select("SELECT customerid from buy_product where time <= #{time} GROUP BY customerid")
+   public List<Integer> selectNoBuy(String time);
 
 }

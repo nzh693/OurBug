@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author Liewona
- * @since 2020-06-10
+ * @since 2020-06-11
  */
 public interface IWarnLostService extends IService<WarnLost> {
 

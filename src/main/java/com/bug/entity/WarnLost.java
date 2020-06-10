@@ -3,7 +3,6 @@ package com.bug.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
 import java.io.Serializable;
 
 /**
@@ -12,7 +11,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author Liewona
- * @since 2020-06-10
+ * @since 2020-06-11
  */
 public class WarnLost extends Model<WarnLost> {
 
@@ -37,7 +36,7 @@ public class WarnLost extends Model<WarnLost> {
     /**
      * 预警时间
      */
-    private LocalDateTime time;
+    private String time;
 
     /**
      * 预警状态
@@ -69,6 +68,20 @@ public class WarnLost extends Model<WarnLost> {
      */
     private Integer customerid;
 
+    public WarnLost() {
+    }
+
+    public WarnLost(Integer userid, Integer linkmanid, String time, Integer state, String measure, String lostReason, String comment, String cuname, Integer customerid) {
+        this.userid = userid;
+        this.linkmanid = linkmanid;
+        this.time = time;
+        this.state = state;
+        this.measure = measure;
+        this.lostReason = lostReason;
+        this.comment = comment;
+        this.cuname = cuname;
+        this.customerid = customerid;
+    }
 
     public Integer getId() {
         return id;
@@ -94,11 +107,11 @@ public class WarnLost extends Model<WarnLost> {
         this.linkmanid = linkmanid;
     }
 
-    public LocalDateTime getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(LocalDateTime time) {
+    public void setTime(String time) {
         this.time = time;
     }
 

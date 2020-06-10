@@ -5,19 +5,22 @@ import com.bug.entity.WarnLost;
 import com.bug.mapper.BuyProductMapper;
 import com.bug.service.IBuyProductService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.bug.service.IWarnLostService;
 import javafx.scene.input.DataFormat;
 import org.apache.logging.log4j.message.StringFormattedMessage;
 import org.assertj.core.util.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.management.modelmbean.ModelMBean;
 import javax.swing.*;
 import javax.xml.crypto.Data;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * <p>
@@ -33,6 +36,10 @@ public class BuyProductServiceImpl extends ServiceImpl<BuyProductMapper, BuyProd
     private final static int COMPARE_STARDARD=6;//月份前置个数
     private final static String DATE_FORMAT="yyyy-MM-dd HH:mm:ss";//时间格式
     private Logger logger= LoggerFactory.getLogger(BuyProduct.class);
+    private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_FORMAT);
+
+    @Autowired
+    private IWarnLostService warnLostService;
 
 
     /**
@@ -40,10 +47,23 @@ public class BuyProductServiceImpl extends ServiceImpl<BuyProductMapper, BuyProd
      * @return
      */
     @Override
+    @Transactional
     public List<WarnLost> createWarnLost() {
-        String date=Maketime(COMPARE_STARDARD);
-        List<BuyProduct> buyProducts=getBaseMapper().selectNoBuy(date);
-        return null;
+        String oldDate=Maketime(COMPARE_STARDARD);
+        List<Integer> cid=getBaseMapper().selectNoBuy(oldDate);//扫描获取客户id
+        List<WarnLost> warnLosts=new ArrayList<>();
+        Random random=new Random();
+        for (Integer i:cid){//生成b本次扫描的预警信息
+            Integer uid = random.nextInt(20);
+            Integer lid = random.nextInt(20);
+            String nowDate=simpleDateFormat.format(new Date());
+            WarnLost warnLost = new WarnLost(uid, lid,nowDate , 1, null,
+                    null, null, "张三", i);
+            warnLostService.save(warnLost);
+            warnLosts.add(warnLost);
+        }
+        logger.debug(warnLosts.toString());
+        return warnLosts;
     }
 
     /**
@@ -52,7 +72,7 @@ public class BuyProductServiceImpl extends ServiceImpl<BuyProductMapper, BuyProd
      */
     @Override
     public String Maketime(int size){
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_FORMAT);
+
         String date=simpleDateFormat.format(new Date());
         logger.info("当前时间："+date);
         int month= DateUtil.monthOf(new Date());//当前月份
@@ -72,4 +92,5 @@ public class BuyProductServiceImpl extends ServiceImpl<BuyProductMapper, BuyProd
         logger.info("前置后："+date);
         return date;
     }
+
 }

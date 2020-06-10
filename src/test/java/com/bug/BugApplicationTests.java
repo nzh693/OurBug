@@ -23,11 +23,7 @@ class BugApplicationTests {
 
     @Test
     public void testTime(){
-        buyProductService.Maketime(10);
-        buyProductService.Maketime(1);
-        buyProductService.Maketime(3);
-        buyProductService.Maketime(6);
-        buyProductService.Maketime(5);
+        buyProductService.createWarnLost();
     }
 
 

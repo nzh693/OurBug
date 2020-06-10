@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author Liewona
- * @since 2020-06-10
+ * @since 2020-06-11
  */
 public interface WarnLostMapper extends BaseMapper<WarnLost> {
 
