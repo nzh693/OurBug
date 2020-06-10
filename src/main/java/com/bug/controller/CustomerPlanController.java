@@ -11,12 +11,9 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -43,7 +40,7 @@ public class CustomerPlanController {
      * 获取当前登录用户被指派的计划
      */
     @ApiOperation(value = "获取当前登录用户被指派的计划",notes = "新增一个销售机会")
-    @PostMapping("/getCustomerPlans")
+    @GetMapping("/getCustomerPlans")
     public ResponseResult<List<ChanceAndPlanVo>> getCustomerPlans(HttpServletRequest request){
         // 获取当前登录的账号
 //        String account = (String) request.getSession().getAttribute("account");
@@ -52,5 +49,13 @@ public class CustomerPlanController {
         ResponseResult<List<ChanceAndPlanVo>> responseResult = customerPlanService.getChanceAndPlanVo(account);
         return responseResult;
     }
+
+    @ApiOperation(value = "制定计划",notes = "制定开发计划")
+    @ApiImplicitParam(name = "customerPlan",value = "开发计划")
+    @PutMapping("/makePlan")
+    public void makePlan(@RequestBody CustomerPlan customerPlan){
+        customerPlanService.makePlan(customerPlan);
+    }
+
 }
 

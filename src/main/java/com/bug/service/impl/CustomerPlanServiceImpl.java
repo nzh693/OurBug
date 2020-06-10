@@ -10,6 +10,7 @@ import com.bug.service.ISaleChanceService;
 import com.bug.service.IUsersService;
 import com.bug.vo.ChanceAndPlanVo;
 import com.bug.vo.ResponseResult;
+import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,8 +42,16 @@ public class CustomerPlanServiceImpl extends ServiceImpl<CustomerPlanMapper, Cus
             Integer id = user.getId();
             // 根据客户经理id获取 - 指派给他的机会
             List<ChanceAndPlanVo> chanceAndPlanVos = saleChanceService.getSaleChanceAndPlanVosByUserId(id);
-            System.out.println("asdasdasd");
+            ResponseResult<List<ChanceAndPlanVo>> responseResult = new ResponseResult<>(chanceAndPlanVos);
+            return responseResult;
         }
         return null;
+    }
+
+    @Override
+    public void makePlan(CustomerPlan customerPlan) {
+        if(customerPlan.getId() != null){
+            baseMapper.updateById(customerPlan);
+        }
     }
 }

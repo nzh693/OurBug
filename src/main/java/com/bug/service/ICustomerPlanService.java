@@ -22,4 +22,6 @@ public interface ICustomerPlanService extends IService<CustomerPlan> {
      * @param account 账号
      */
     ResponseResult<List<ChanceAndPlanVo>> getChanceAndPlanVo(String account);
+
+    void makePlan(CustomerPlan customerPlan);
 }

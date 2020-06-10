@@ -38,6 +38,6 @@ public class ChanceAndPlanVo {
     @ApiModelProperty(value = "描述",name = "description",example = "熊世隐简直无敌好吧")
     private String description;
 
-    @ApiModelProperty(value = "计划是否制定",name = "state",example = "0-未制定，1-已制定")
-    private Integer state;
+    @ApiModelProperty(value = "计划是否制定",name = "makeState",example = "0-未制定，1-已制定")
+    private Integer makeState;
 }
