@@ -7,6 +7,8 @@ import com.bug.entity.Services;
 import com.bug.service.IServicesService;
 import com.bug.utils.ResultByInteger;
 import com.bug.utils.ResultByList;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -28,6 +30,7 @@ import java.util.Date;
  * @author Liewona
  * @since 2020-06-09
  */
+@Api(tags = "服务记录管理")
 @Controller
 @RequestMapping("/api/v1")
 @CrossOrigin
@@ -36,24 +39,16 @@ public class ServicesController {
     @Autowired
     private IServicesService services;
 
-    @PostMapping("service")
-    public @ResponseBody
-    ResultByInteger insertServices(@RequestBody Services s) {
-        ResultByInteger code = new ResultByInteger();
 
-//        s.setCreateTime(new Date());
-        boolean isOk = services.save(s);
-        if(isOk) {
-            code.setCode(0);
-        } else {
-            code.setCode(-1);
-        }
-        return code;
-    }
-
+    /**
+     * 查询服务
+     * @param page 页码
+     * @param pageLimit 每页大小
+     * @return 返回查询列表
+     */
+    @ApiOperation(value = "查询所有的服务。可以分页")
     @GetMapping("services")
-    public @ResponseBody
-    ResultByList getServices(
+    public @ResponseBody ResultByList getServices(
             @ApiParam(value = "要查询的页码",required = true)
             @RequestParam(defaultValue = "1") Integer page, //page请求的页码,默认为1
             @ApiParam(value = "每页的行数",required = true)
@@ -68,8 +63,6 @@ public class ServicesController {
 //        services.save(s);
 
         try {
-
-
             QueryWrapper<Services> qw = new QueryWrapper<>();
 //            qw.eq("state", s.getState());
             Page<Services> pageCustomer = services.page(new Page<Services>(page,pageLimit), qw);
@@ -79,17 +72,25 @@ public class ServicesController {
             rst.setCode(0);
         } catch (Exception e) {
             rst.setMsg("查询失败：" + e.toString());
-            rst.setCode(-1);
+            rst.setCode(1);
         }
         return rst;
     }
 
+    /**
+     * 根据条件查询的的服务记录（状态或id），返回一个列表
+     * @param page 页码
+     * @param pageLimit 每页行数
+     * @param s 将传入的参数自动注入到s中
+     * @return
+     */
+    @ApiOperation(value = "根据条件查询的的服务记录（状态或id），返回一个列表")
     @GetMapping("service")
     public @ResponseBody ResultByList getServiceByField(
-            @ApiParam(value = "要查询的页码",required = true)
+            @ApiParam(value = "要查询的页码")
             @RequestParam(defaultValue = "1")
                     Integer page, //page请求的页码,默认为1
-            @ApiParam(value = "每页的行数",required = true)
+            @ApiParam(value = "每页的行数")
             @RequestParam(defaultValue = "10")
                     Integer pageLimit,//limit每页的行数，默认为10
             Services s) {
@@ -113,12 +114,33 @@ public class ServicesController {
             rst.setCode(0);
         } catch (Exception e) {
             rst.setMsg("查询失败：" + e.toString());
-            rst.setCode(-1);
+            rst.setCode(1);
         }
 
         return rst;
     }
 
+    /**
+     * 新建服务记录，
+     * @param s 将请求参数自动注入到s中
+     * @return
+     */
+    @ApiOperation("插入服务记录")
+    @PostMapping("service")
+    public @ResponseBody
+    ResultByInteger insertServices(@RequestBody Services s) {
+        ResultByInteger code = new ResultByInteger();
+
+//        s.setCreateTime(new Date());
+        boolean isOk = services.save(s);
+        if(isOk) {
+            code.setCode(0);
+        } else {
+            code.setCode(1);
+        }
+        return code;
+    }
+    @ApiOperation("更新服务记录")
     @PutMapping("service")
     @ResponseBody
     public ResultByInteger updateServices(@RequestBody Services s) {
@@ -136,15 +158,19 @@ public class ServicesController {
         if(isOk) {
             code.setCode(0);
         } else {
-            code.setCode(-1);
+            code.setCode(1);
         }
         return code;
     }
 
 
-
+    /**
+     * 在调用controller方法之前检查用户，并设置用户
+     * @param request HttpServletRequest
+     * @param model 数据Model
+     */
     @ModelAttribute
-    public void setUser(HttpServletRequest request, HttpServletResponse response, Model model) {
+    public void setUser(HttpServletRequest request, Model model) {
         Object o = request.getSession().getAttribute("signer");
         model.addAttribute("user", o);
 //        System.out.println(request.getCookies());
