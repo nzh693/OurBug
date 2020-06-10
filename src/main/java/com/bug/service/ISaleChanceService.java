@@ -36,4 +36,6 @@ public interface ISaleChanceService extends IService<SaleChance> {
     ResponseResult<ChanceAndUserVo> getSaleChanceAndUser(Integer id);
 
     void deleteSaleChance(Integer id);
+
+    SaleChance assignedChance(Integer saleChanceId, Integer userId, String username);
 }

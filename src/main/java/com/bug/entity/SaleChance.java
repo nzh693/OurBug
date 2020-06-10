@@ -81,7 +81,7 @@ public class SaleChance extends Model<SaleChance> {
     private Integer userid;
 
     @ApiModelProperty(value = "被指派的客户经理",name = "username",example = "刘三刀")
-    private Integer username;
+    private String username;
 
     @ApiModelProperty(value = "指派时间",name = "assginTime",example = "2020-06-06 09:15:29")
     private Date assginTime;

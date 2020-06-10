@@ -3,8 +3,13 @@ package com.bug.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
-import java.io.Serializable;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+import java.util.Date;
 
 /**
  * <p>
@@ -14,76 +19,36 @@ import java.io.Serializable;
  * @author Liewona
  * @since 2020-06-09
  */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class CustomerPlan extends Model<CustomerPlan> {
 
     private static final long serialVersionUID=1L;
 
-    /**
-     * 开发计划id
-     */
+    @ApiModelProperty(value = "开发计划id",name = "id",example = "1")
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    /**
-     * 开发机会id
-     */
-    private String chanceid;
+    @ApiModelProperty(value = "指派经理id",name = "userId",example = "1")
+    private Integer userId;
 
-    /**
-     * 开发日期(xxxx-xx-xx)
-     */
-    private LocalDateTime date;
+    @ApiModelProperty(value = "开发机会id",name = "chanceid",example = "1")
+    private Integer chanceid;
 
-    /**
-     * 内容
-     */
-    private String content;
+    @ApiModelProperty(value = "开发日期",name = "date",example = "2020-06-06 09:15:29")
+    private Date date;
 
+    @ApiModelProperty(value = "前期计划",name = "content1",example = "执行xx")
+    private String content1;
 
-    public Integer getId() {
-        return id;
-    }
+    @ApiModelProperty(value = "中期计划",name = "content2",example = "执行xx")
+    private String content2;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    @ApiModelProperty(value = "后期计划",name = "content3",example = "执行xx")
+    private String content3;
 
-    public String getChanceid() {
-        return chanceid;
-    }
-
-    public void setChanceid(String chanceid) {
-        this.chanceid = chanceid;
-    }
-
-    public LocalDateTime getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDateTime date) {
-        this.date = date;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    @Override
-    protected Serializable pkVal() {
-        return this.id;
-    }
-
-    @Override
-    public String toString() {
-        return "CustomerPlan{" +
-        "id=" + id +
-        ", chanceid=" + chanceid +
-        ", date=" + date +
-        ", content=" + content +
-        "}";
-    }
+    @ApiModelProperty(value = "进度",name = "progress",example = "1")
+    private Integer progress;
 }

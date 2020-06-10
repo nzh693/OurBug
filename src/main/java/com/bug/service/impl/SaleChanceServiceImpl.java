@@ -3,21 +3,23 @@ package com.bug.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.bug.entity.Customer;
+import com.bug.entity.CustomerPlan;
 import com.bug.entity.SaleChance;
 import com.bug.entity.Users;
 import com.bug.mapper.SaleChanceMapper;
+import com.bug.service.ICustomerPlanService;
 import com.bug.service.ICustomerService;
 import com.bug.service.ISaleChanceService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bug.service.IUsersService;
 import com.bug.vo.ChanceAndUserVo;
 import com.bug.vo.ResponseResult;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -36,6 +38,8 @@ public class SaleChanceServiceImpl extends ServiceImpl<SaleChanceMapper, SaleCha
     private ICustomerService customerService;
     @Autowired
     private IUsersService usersService;
+    @Autowired
+    private ICustomerPlanService customerPlanService;
 
     @Override
     public void saveSaleChance(SaleChance saleChance) {
@@ -82,5 +86,21 @@ public class SaleChanceServiceImpl extends ServiceImpl<SaleChanceMapper, SaleCha
             // 不存在则删除
             baseMapper.deleteById(id);
         }
+    }
+
+    @Override
+    public SaleChance assignedChance(Integer saleChanceId, Integer userId, String username) {
+        SaleChance saleChance = baseMapper.selectById(saleChanceId);
+        saleChance.setState(2); // 已分配
+        saleChance.setUserid(userId);
+        saleChance.setUsername(username);
+        saleChance.setAssginTime(new Date());
+        baseMapper.updateById(saleChance);
+        // 创建开发计划
+        CustomerPlan customerPlan = new CustomerPlan();
+        customerPlan.setChanceid(saleChanceId);
+        customerPlan.setUserId(userId);
+        customerPlanService.save(customerPlan);
+        return saleChance;
     }
 }

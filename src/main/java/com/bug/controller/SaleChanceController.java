@@ -91,20 +91,35 @@ public class SaleChanceController {
     }
 
     /**
-     * 指派/修改 - 销售机会
+     * 修改 - 销售机会
      * @param saleChance 销售机会
      */
-    @ApiOperation(value = "指派/修改销售机会",notes = "将销售机会指派给一个客户经理/修改销售机会")
+    @ApiOperation(value = "修改销售机会",notes = "修改销售机会")
     @ApiImplicitParam(name = "saleChance",value = "销售机会")
     @PutMapping("/updateSaleChance")
     public SaleChance updateSaleChance(@RequestBody SaleChance saleChance){
-        log.info("修改/指派！");
+        log.info("修改！");
         if(saleChance.getId() == null){  // id不存在不是修改
             return null;
         }else{
             saleChanceService.updateById(saleChance);
             return saleChance;
         }
+    }
+
+    /**
+     * 指派销售机会
+     * @param saleChanceId
+     * @param userId
+     * @param username
+     * @return
+     */
+    @ApiOperation(value = "指派销售机会",notes = "指派销售机会")
+    @ApiImplicitParam(name = "chanceAndAssignVo",value = "销售机会与指派Vo封装")
+    @PostMapping("/assignedChance")
+    public SaleChance assignedChance(@RequestParam("saleChanceId") Integer saleChanceId,@RequestParam("userId") Integer userId,@RequestParam("username") String username){
+       SaleChance saleChance = saleChanceService.assignedChance(saleChanceId,userId,username);
+       return saleChance;
     }
 
     /**
