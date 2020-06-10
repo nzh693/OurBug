@@ -23,6 +23,5 @@ spring:
 #    maxWait: 60000
 #    maxActive: 20
 
-
-
-
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/*.xml   # mapper的位置

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bug.mapper.SaleChanceMapper">
+
+    <resultMap type="com.bug.vo.ChanceAndPlanVo" id="chanceAndPlanVo">
+        <result property="id" column="id"/>
+        <result property="customerName" column="customer_name"/>
+        <result property="chanceFrom" column="chance_from"/>
+        <result property="telephone" column="telephone"/>
+        <result property="summary" column="summary"/>
+        <result property="description" column="description"/>
+        <result property="state" column="state"/>
+    </resultMap>
+    <select id="getSaleChanceAndPlanVosByUserId" resultMap="chanceAndPlanVo">
+       select
+            chance.id id,
+            customer_name,
+            chance_from,
+            telephone,
+            summary,
+            description,
+            plane.state state
+       from sale_chance chance,customer_plan plane
+       where chance.userid=#{id} and chance.userid = plane.userid;
+    </select>
+
+
+</mapper>

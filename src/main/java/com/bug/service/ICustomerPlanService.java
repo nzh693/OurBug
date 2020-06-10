@@ -2,6 +2,7 @@ package com.bug.service;
 
 import com.bug.entity.CustomerPlan;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.bug.vo.ChanceAndPlanVo;
 import com.bug.vo.ResponseResult;
 
 import java.util.List;
@@ -16,5 +17,9 @@ import java.util.List;
  */
 public interface ICustomerPlanService extends IService<CustomerPlan> {
 
-    ResponseResult<List<CustomerPlan>> getCustomerPlans(String account);
+    /**
+     * 根据账户获取ChanceAndPlanVo
+     * @param account 账号
+     */
+    ResponseResult<List<ChanceAndPlanVo>> getChanceAndPlanVo(String account);
 }

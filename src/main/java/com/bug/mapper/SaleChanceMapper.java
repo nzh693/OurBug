@@ -2,6 +2,9 @@ package com.bug.mapper;
 
 import com.bug.entity.SaleChance;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.bug.vo.ChanceAndPlanVo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface SaleChanceMapper extends BaseMapper<SaleChance> {
 
+    List<ChanceAndPlanVo> getSaleChanceAndPlanVosByUserId(Integer id);
 }

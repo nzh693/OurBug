@@ -4,6 +4,7 @@ package com.bug.controller;
 import com.bug.entity.CustomerPlan;
 import com.bug.service.ICustomerPlanService;
 import com.bug.service.ICustomerService;
+import com.bug.vo.ChanceAndPlanVo;
 import com.bug.vo.ResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -38,12 +39,17 @@ public class CustomerPlanController {
     @Autowired
     private ICustomerPlanService customerPlanService;
 
+    /**
+     * 获取当前登录用户被指派的计划
+     */
     @ApiOperation(value = "获取当前登录用户被指派的计划",notes = "新增一个销售机会")
     @PostMapping("/getCustomerPlans")
-    public ResponseResult<List<CustomerPlan>> getCustomerPlans(HttpServletRequest request){
+    public ResponseResult<List<ChanceAndPlanVo>> getCustomerPlans(HttpServletRequest request){
         // 获取当前登录的账号
-        String account = (String) request.getSession().getAttribute("account");
-        ResponseResult<List<CustomerPlan>> responseResult = customerPlanService.getCustomerPlans(account);
+//        String account = (String) request.getSession().getAttribute("account");
+        String account = "123456";
+        // 只需要获取当前的账号
+        ResponseResult<List<ChanceAndPlanVo>> responseResult = customerPlanService.getChanceAndPlanVo(account);
         return responseResult;
     }
 }

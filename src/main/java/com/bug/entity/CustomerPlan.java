@@ -51,4 +51,7 @@ public class CustomerPlan extends Model<CustomerPlan> {
 
     @ApiModelProperty(value = "进度",name = "progress",example = "1")
     private Integer progress;
+
+    @ApiModelProperty(value = "状态",name = "state",example = "0-未制定，1-已制定")
+    private Integer state;
 }

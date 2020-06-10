@@ -12,6 +12,7 @@ import com.bug.service.ICustomerService;
 import com.bug.service.ISaleChanceService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bug.service.IUsersService;
+import com.bug.vo.ChanceAndPlanVo;
 import com.bug.vo.ChanceAndUserVo;
 import com.bug.vo.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,8 @@ public class SaleChanceServiceImpl extends ServiceImpl<SaleChanceMapper, SaleCha
     private IUsersService usersService;
     @Autowired
     private ICustomerPlanService customerPlanService;
+    @Autowired
+    private SaleChanceMapper saleChanceMapper;
 
     @Override
     public void saveSaleChance(SaleChance saleChance) {
@@ -98,9 +101,27 @@ public class SaleChanceServiceImpl extends ServiceImpl<SaleChanceMapper, SaleCha
         baseMapper.updateById(saleChance);
         // 创建开发计划
         CustomerPlan customerPlan = new CustomerPlan();
-        customerPlan.setChanceid(saleChanceId);
-        customerPlan.setUserId(userId);
+        customerPlan.setChanceid(saleChanceId);  // 销售机会id
+        customerPlan.setUserId(userId);  // 客户经理id
+        customerPlan.setState(0);   // 未制定计划
+        customerPlan.setProgress(0);  // 进度为0
         customerPlanService.save(customerPlan);
         return saleChance;
     }
+
+    @Override
+    public List<SaleChance> getSaleChanceByUserId(Integer id) {
+        QueryWrapper<SaleChance> wrapper = new QueryWrapper<>();
+        wrapper.eq("userid",id);
+        List<SaleChance> saleChances = baseMapper.selectList(wrapper);
+        return saleChances;
+    }
+
+    @Override
+    public List<ChanceAndPlanVo> getSaleChanceAndPlanVosByUserId(Integer id) {
+        List<ChanceAndPlanVo> chanceAndPlanVos = saleChanceMapper.getSaleChanceAndPlanVosByUserId(id);
+        return chanceAndPlanVos;
+    }
+
+
 }

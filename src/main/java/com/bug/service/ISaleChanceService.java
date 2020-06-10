@@ -2,6 +2,7 @@ package com.bug.service;
 
 import com.bug.entity.SaleChance;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.bug.vo.ChanceAndPlanVo;
 import com.bug.vo.ChanceAndUserVo;
 import com.bug.vo.ResponseResult;
 
@@ -38,4 +39,8 @@ public interface ISaleChanceService extends IService<SaleChance> {
     void deleteSaleChance(Integer id);
 
     SaleChance assignedChance(Integer saleChanceId, Integer userId, String username);
+
+    List<SaleChance> getSaleChanceByUserId(Integer id);
+
+    List<ChanceAndPlanVo> getSaleChanceAndPlanVosByUserId(Integer id);
 }
