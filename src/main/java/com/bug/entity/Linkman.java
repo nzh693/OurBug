@@ -22,42 +22,34 @@ public class Linkman extends Model<Linkman> {
      */
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
-
     /**
      * 联系人姓名
      */
     private String name;
-
     /**
      * 性别
      */
     private String sex;
-
     /**
      * 职位
      */
     private String position;
-
     /**
      * 工作电话
      */
     private String telephone;
-
     /**
      * 手机
      */
     private String phone;
-
     /**
      * 备注信息
      */
     private String comment;
-
     /**
      * 销售机会id
      */
     private Integer chanceid;
-
     /**
      * 客户id
      */

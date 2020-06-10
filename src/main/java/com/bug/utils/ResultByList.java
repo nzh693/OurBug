@@ -45,5 +45,4 @@ public class ResultByList {
         this.data = data;
     }
 
-
 }

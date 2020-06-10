@@ -2,6 +2,9 @@ package com.bug.service;
 
 import com.bug.entity.BuyProduct;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.bug.entity.WarnLost;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +15,18 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2020-06-09
  */
 public interface IBuyProductService extends IService<BuyProduct> {
+
+    /**
+     * 在历史订单表查询6个月没有消费的订单，筛选生成流程预警
+     * @return 流失预警
+     */
+    public List<WarnLost> createWarnLost();
+
+    /**
+     * 生成比较的时间字符串
+     * @param size
+     * @return
+     */
+    public String Maketime(int size);
 
 }

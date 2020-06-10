@@ -20,6 +20,6 @@ public class ResponseResult<T> {
     private T data;         // 数据
 
     public ResponseResult(T data){
-        this(0,"成功!",0,data);
+        this(0,"成功",0,data);
     }
 }

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author Liewona
- * @since 2020-06-09
+ * @since 2020-06-10
  */
 @Service
 public class EventServiceImpl extends ServiceImpl<EventMapper, Event> implements IEventService {

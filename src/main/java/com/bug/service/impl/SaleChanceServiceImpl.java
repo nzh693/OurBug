@@ -2,6 +2,7 @@ package com.bug.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bug.entity.Customer;
 import com.bug.entity.CustomerPlan;
 import com.bug.entity.SaleChance;
@@ -10,7 +11,6 @@ import com.bug.mapper.SaleChanceMapper;
 import com.bug.service.ICustomerPlanService;
 import com.bug.service.ICustomerService;
 import com.bug.service.ISaleChanceService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bug.service.IUsersService;
 import com.bug.vo.ChanceAndPlanVo;
 import com.bug.vo.ChanceAndUserVo;
@@ -41,12 +41,12 @@ public class SaleChanceServiceImpl extends ServiceImpl<SaleChanceMapper, SaleCha
     private IUsersService usersService;
     @Autowired
     private ICustomerPlanService customerPlanService;
-    @Autowired
-    private SaleChanceMapper saleChanceMapper;
+//    @Autowired
+//    private SaleChanceMapper saleChanceMapper;
 
     @Override
     public void saveSaleChance(SaleChance saleChance) {
-        // 保存Customer
+         //保存Customer
         Customer customer = new Customer(saleChance.getCustomerName(),saleChance.getSex(),saleChance.getAddr(),saleChance.getTelephone(),saleChance.getLevel(),saleChance.getState());
         customerService.save(customer);
         System.out.println(customer.getId());
@@ -119,7 +119,7 @@ public class SaleChanceServiceImpl extends ServiceImpl<SaleChanceMapper, SaleCha
 
     @Override
     public List<ChanceAndPlanVo> getSaleChanceAndPlanVosByUserId(Integer id) {
-        List<ChanceAndPlanVo> chanceAndPlanVos = saleChanceMapper.getSaleChanceAndPlanVosByUserId(id);
+        List<ChanceAndPlanVo> chanceAndPlanVos = getBaseMapper().getSaleChanceAndPlanVosByUserId(id);
         return chanceAndPlanVos;
     }
 

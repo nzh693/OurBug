@@ -31,7 +31,7 @@ public class Admin extends Model<Admin> {
     /**
      * 账户
      */
-    private String acount;
+    private String account;
 
     /**
      * 密码
@@ -56,11 +56,11 @@ public class Admin extends Model<Admin> {
     }
 
     public String getAcount() {
-        return acount;
+        return account;
     }
 
     public void setAcount(String acount) {
-        this.acount = acount;
+        this.account = acount;
     }
 
     public String getPassword() {
@@ -81,7 +81,7 @@ public class Admin extends Model<Admin> {
         return "Admin{" +
         "id=" + id +
         ", name=" + name +
-        ", acount=" + acount +
+        ", acount=" + account +
         ", password=" + password +
         "}";
     }
