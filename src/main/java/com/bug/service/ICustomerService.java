@@ -17,11 +17,11 @@ import java.util.List;
 public interface ICustomerService extends IService<Customer> {
 
     /**
-     * 按照客户id查询客户
-     * @param customer
-     * @return 客户
+     * 修改客户的状态字段为0；表示已经流失
+     * @param cid
+     * @return
      */
-    public Customer getCustomerById(Customer customer);
+    public boolean updateState(int cid);
 
 
 

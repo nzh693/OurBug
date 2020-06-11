@@ -81,7 +81,7 @@ public class BuyProductController {
 
 
     /**
-     * 系统被动触发：扫描6个月没有下单的客户，并筛选出没有
+     * 系统被动触发：扫描6个月没有下单的客户，更新记录表，并筛选出首页数据返回
      * @return
      */
     
@@ -127,6 +127,11 @@ public class BuyProductController {
         }
         return result;
     }
+
+
+
+
+
 
 
 
