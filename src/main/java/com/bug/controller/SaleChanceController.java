@@ -25,7 +25,7 @@ import java.util.List;
  * @Date 2020/6/9
  */
 @RestController
-@RequestMapping("/api/v1/saleChance")
+@RequestMapping("/saleChance")
 @CrossOrigin
 @Slf4j
 @Api(tags = "销售机会业务接口")
@@ -49,7 +49,7 @@ public class SaleChanceController {
             @ApiImplicitParam(name = "customerName",value = "客户姓名",dataType = "String"),
             @ApiImplicitParam(name = "state",value = "状态",dataType = "Integer")
     })
-    public ResponseResult<List<SaleChance>> getSaleChanceByPage(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit,
+    public ResponseResult<List<SaleChance>> getSaleChanceByPage(@RequestParam(value = "page",defaultValue = "1") Integer page, @RequestParam(value = "limit",defaultValue = "5") Integer limit,
                                                   @RequestParam(value = "customerName",required=false) String customerName,
                                                   @RequestParam(value = "state",required=false) Integer state){
         log.info("当前页：" + page + ",每页" + limit + "条数据");
@@ -64,9 +64,9 @@ public class SaleChanceController {
     @ApiOperation(value = "新增销售机会",notes = "新增一个销售机会")
     @ApiImplicitParam(name = "saleChance",value = "销售机会")
     @PostMapping("/addSaleChance")
-    public SaleChance addSaleChance(@RequestBody SaleChance saleChance, HttpServletRequest request){
+    public ResponseResult<String> addSaleChance(@RequestBody SaleChance saleChance, HttpServletRequest request){
 //        request.getSession().setAttribute("xjs","熊劲松");
-//        String xjs = (String) request.getSession().getAttribute("xjs");
+//        String xjs = (String) request.getSession().get+Attribute("xjs");
         log.info("新增销售机会！");
         //TODO： 获取登录的用户，这里固定写死
         saleChance.setCreateUserid(1);
@@ -74,7 +74,8 @@ public class SaleChanceController {
         saleChance.setState(1);   // 默认
         saleChance.setCreateTime(new Date()); // 创建时间
         saleChanceService.saveSaleChance(saleChance);
-        return saleChance;
+        ResponseResult<String> responseResult = new ResponseResult<>(0,"新增销售机会成功！",null);
+        return responseResult;
     }
 
 
@@ -97,14 +98,15 @@ public class SaleChanceController {
     @ApiOperation(value = "修改销售机会",notes = "修改销售机会")
     @ApiImplicitParam(name = "saleChance",value = "销售机会")
     @PutMapping("/updateSaleChance")
-    public SaleChance updateSaleChance(@RequestBody SaleChance saleChance){
-        log.info("修改！");
+    public ResponseResult<String> updateSaleChance(@RequestBody SaleChance saleChance){
+        ResponseResult<String> responseResult = null;
         if(saleChance.getId() == null){  // id不存在不是修改
-            return null;
+            responseResult = new ResponseResult<>(1,"机会不存在，修改失败！",null);
         }else{
             saleChanceService.updateById(saleChance);
-            return saleChance;
+            responseResult = new ResponseResult<>(0,"修改成功！",null);
         }
+        return responseResult;
     }
 
     /**
@@ -117,9 +119,15 @@ public class SaleChanceController {
     @ApiOperation(value = "指派销售机会",notes = "指派销售机会")
     @ApiImplicitParam(name = "chanceAndAssignVo",value = "销售机会与指派Vo封装")
     @PostMapping("/assignedChance")
-    public SaleChance assignedChance(@RequestParam("saleChanceId") Integer saleChanceId,@RequestParam("userId") Integer userId,@RequestParam("username") String username){
+    public ResponseResult<String> assignedChance(@RequestParam("saleChanceId") Integer saleChanceId,@RequestParam("userId") Integer userId,@RequestParam("username") String username){
        SaleChance saleChance = saleChanceService.assignedChance(saleChanceId,userId,username);
-       return saleChance;
+       ResponseResult<String> responseResult = null;
+       if(saleChance != null){
+           responseResult = new ResponseResult<>(0,"指派销售机会成功！",null);
+       }else{
+           responseResult = new ResponseResult<>(1,"未知错误，指派失败！",null);
+       }
+       return responseResult;
     }
 
     /**
@@ -131,7 +139,8 @@ public class SaleChanceController {
     @DeleteMapping("/deleteSaleChance")
     public ResponseResult<String> deleteSaleChance(@RequestParam("id") Integer id){
         saleChanceService.deleteSaleChance(id);
-        return null;
+        ResponseResult<String> responseResult = new ResponseResult<>(0,"删除机会成功！",null);
+        return responseResult;
     }
 
 

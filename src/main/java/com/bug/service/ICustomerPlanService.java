@@ -17,11 +17,15 @@ import java.util.List;
  */
 public interface ICustomerPlanService extends IService<CustomerPlan> {
 
-    /**
-     * 根据账户获取ChanceAndPlanVo
-     * @param account 账号
-     */
-    ResponseResult<List<ChanceAndPlanVo>> getChanceAndPlanVo(String account);
-
     void makePlan(CustomerPlan customerPlan);
+
+    ResponseResult<List<CustomerPlan>> getChanceAndPlanVo(Integer page, Integer limit, String account);
+
+    Integer getCountByUserId(Integer id);
+
+    ResponseResult<List<CustomerPlan>> getCustomerPlan(Integer page, Integer limit, Integer id);
+
+    CustomerPlan getPlanByChanceId(Integer chanceid);
+
+    void developmentResult(CustomerPlan customerPlan);
 }
