@@ -53,7 +53,7 @@ public class BuyProductServiceImpl extends ServiceImpl<BuyProductMapper, BuyProd
         String oldDate=Maketime(COMPARE_STARDARD);
         QueryWrapper<WarnLost> qw = new QueryWrapper<>();
         qw.gt("id",1);
-//        getBaseMapper().deleteAllWarnInfo();//删除旧的预警记录
+        getBaseMapper().deleteAllWarnInfo();//删除旧的预警记录
         List<Integer> cid=getBaseMapper().selectNoBuy(oldDate);//扫描获取客户id
         List<WarnLost> warnLosts=new ArrayList<>();
         Random random=new Random();

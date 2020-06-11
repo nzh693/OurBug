@@ -73,9 +73,14 @@ public class WarnLostServiceImpl extends ServiceImpl<WarnLostMapper, WarnLost> i
 
     @Override
     @Transactional
-    public Boolean confirmLost(int wid, String reason) {
-        getBaseMapper().updatetReasonByID(wid,reason);
+    public Boolean confirmLost(int wid) {
         int cid=getBaseMapper().selectCustomerIdByWarnId(wid);
+        //修改预警信息状态
         return customerService.updateState(cid);
+    }
+
+    @Override
+    public Boolean setResaon(int wid, String reason) {
+        return null;
     }
 }
