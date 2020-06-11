@@ -47,42 +47,38 @@ public class ServicesController {
      * @param pageLimit 每页大小
      * @return 返回查询列表
      */
-    @ApiOperation(value = "查询所有的服务,分页")
-    @GetMapping("services")
-    public @ResponseBody ResultByList getServices(
-            @ApiParam(value = "要查询的页码",required = true)
-            @RequestParam(defaultValue = "1") Integer page, //page请求的页码,默认为1
-            @ApiParam(value = "每页的行数",required = true)
-            @RequestParam(defaultValue = "10") Integer pageLimit//limit每页的行数，默认为10
-    ) {
-        ResultByList rst = new ResultByList();
-        try {
-            QueryWrapper<Services> qw = new QueryWrapper<>();
-            Page<Services> pageCustomer = services.page(new Page<Services>(page,pageLimit), qw);
-            rst.setData(pageCustomer.getRecords());
-            rst.setCount(pageCustomer.getTotal());
-            rst.setMsg("查询成功");
-            rst.setCode(0);
-        } catch (Exception e) {
-            rst.setMsg("查询失败：" + e.toString());
-            rst.setCode(1);
-        }
-        return rst;
-    }
+//    @ApiOperation(value = "查询所有的服务,分页")
+//    @GetMapping("/services")
+//    public @ResponseBody ResultByList getServices() {
+//        ResultByList rst = new ResultByList();
+//        try {
+//            QueryWrapper<Services> qw = new QueryWrapper<>();
+//            Page<Services> pageCustomer = services.page(new Page<Services>(page,pageLimit), qw);
+//            rst.setData(pageCustomer.getRecords());
+//            rst.setCount(pageCustomer.getTotal());
+//            rst.setMsg("查询成功");
+//            rst.setCode(0);
+//        } catch (Exception e) {
+//            rst.setMsg("查询失败：" + e.toString());
+//            rst.setCode(1);
+//        }
+//        return rst;
+//    }
 
 
     /**
      * 查询所有的服务记录
      */
     @ApiOperation("获取所有的服务记录，用于统计报表")
-    @GetMapping("as")
-    public void getAll() {
+    @GetMapping("/services")
+    public @ResponseBody ResultByList getAll() {
         ResultByList rst = new ResultByList();
         List<Services> list = services.list();
         rst.setData(list);
         rst.setCount((long) list.size());
         rst.setMsg("查询成功");
         rst.setCode(0);
+        return rst;
     }
 
     /**
@@ -93,7 +89,7 @@ public class ServicesController {
      * @return
      */
     @ApiOperation(value = "根据条件查询的的服务记录（状态或id），返回一个列表")
-    @GetMapping("service")
+    @GetMapping("/service")
     public @ResponseBody ResultByList getServiceByField(
             @ApiParam(value = "要查询的页码")
             @RequestParam(defaultValue = "1")
@@ -107,6 +103,10 @@ public class ServicesController {
         ResultByList rst = new ResultByList();
 
         try {
+            if(s == null) {
+                rst.setData(services.list());
+                rst.setCount((long) rst.getData().size());
+            }
             if(s.getId() != null) {
                 Services byId = services.getById(s);
                 rst.setData(Collections.singletonList(byId));
