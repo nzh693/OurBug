@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bug.mapper.ServicesMapper">
+
+    <resultMap type="com.bug.vo.ServiceTableResult" id="rst">
+        <result property="id" column="id"/>
+        <result property="type" column="type"/>
+        <result property="userid" column="userid"/>
+        <result property="customer_id" column="customer_id"/>
+        <result property="cusName" column="cuName"/>
+        <result property="telephone" column="telephone"/>
+        <result property="service_content" column="service_content"/>
+        <result property="create_time" column="create_time"/>
+        <result property="state" column="state"/>
+        <result property="allocation-time" column="allocation_time"/>
+        <result property="service_dispose" column="service_dispose"/>
+        <result property="satisfaction" column="satisfaction"/>
+        <result property="comment" column="comment"/>
+    </resultMap>
+    <select id="getAllContent" resultMap="rst">
+        select
+        s.id id, type, u.id userid, deal_userid, c.id customer_id,
+        c.name cusName, u.phone telephone, service_content, s.create_time create_time,
+        s.state state, allocation_time, service_dispose, satisfaction, comment
+        from users u, services s, customer c, service_back sb
+        where s.userid=u.id and c.id=s.customer_id and s.id=sb.serviceid
+
+    </select>
+
+
+</mapper>

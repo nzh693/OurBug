@@ -7,6 +7,7 @@ import com.bug.entity.Services;
 import com.bug.service.IServicesService;
 import com.bug.utils.ResultByInteger;
 import com.bug.utils.ResultByList;
+import com.bug.vo.ServiceTableResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -39,31 +40,6 @@ public class ServicesController {
 
     @Autowired
     private IServicesService services;
-
-
-    /**
-     * 查询服务
-     * @param page 页码
-     * @param pageLimit 每页大小
-     * @return 返回查询列表
-     */
-//    @ApiOperation(value = "查询所有的服务,分页")
-//    @GetMapping("/services")
-//    public @ResponseBody ResultByList getServices() {
-//        ResultByList rst = new ResultByList();
-//        try {
-//            QueryWrapper<Services> qw = new QueryWrapper<>();
-//            Page<Services> pageCustomer = services.page(new Page<Services>(page,pageLimit), qw);
-//            rst.setData(pageCustomer.getRecords());
-//            rst.setCount(pageCustomer.getTotal());
-//            rst.setMsg("查询成功");
-//            rst.setCode(0);
-//        } catch (Exception e) {
-//            rst.setMsg("查询失败：" + e.toString());
-//            rst.setCode(1);
-//        }
-//        return rst;
-//    }
 
 
     /**
@@ -101,12 +77,15 @@ public class ServicesController {
 
 
         ResultByList rst = new ResultByList();
+        ServiceTableResult str = new ServiceTableResult();
 
         try {
             if(s == null) {
-                rst.setData(services.list());
-                rst.setCount((long) rst.getData().size());
+                List<ServiceTableResult> allContent = services.getAllContent();
+                rst.setData(allContent);
+                rst.setCount((long) allContent.size());
             }
+            assert s != null;
             if(s.getId() != null) {
                 Services byId = services.getById(s);
                 rst.setData(Collections.singletonList(byId));
@@ -148,6 +127,8 @@ public class ServicesController {
         }
         return code;
     }
+
+
     @ApiOperation("更新服务记录")
     @PutMapping("service")
     @ResponseBody
