@@ -29,4 +29,13 @@ public interface IBuyProductService extends IService<BuyProduct> {
      */
     public String Maketime(int size);
 
+    /**
+     * 按页面要求返回预警记录
+     * @param page 页码
+     * @param size 页大小
+     * @param warnLosts 所有数据
+     * @return
+     */
+    public List<WarnLost> getPageWarLost(int page,int size,List<WarnLost> warnLosts);
+
 }
