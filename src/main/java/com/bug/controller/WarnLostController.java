@@ -1,14 +1,13 @@
 package com.bug.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.bug.entity.WarnLost;
 import com.bug.service.IWarnLostService;
 import com.bug.utils.ResultByList;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -100,24 +99,25 @@ public class WarnLostController {
         return result;
     }
 
-
     /**
      * 修改流失原因
-     * @param id  预警记录id
-     * @param reason 流失原因
+     * @param str json{id,reason}
      * @return
      */
     @RequestMapping(value = "setReason")
-    public ResultByList setReason(int id, String reason){
+    public ResultByList setReason(@RequestBody String str){
+        JSONObject jsonObject = JSONObject.parseObject(str);
         ResultByList result = new ResultByList();
-        Boolean re = warnLostService.setResaon(id, reason);
+        Integer id=Integer.valueOf(jsonObject.getString("id"));
+        String reason= jsonObject.getString("reason");
+        Boolean re = warnLostService.setResaon(id,reason);
         if(re){
             result.setCode(0);
-            result.setMsg("确认流失成功");
+            result.setMsg("修改成功");
             result.setCount(0L);
         }else {
             result.setCode(0);
-            result.setMsg("确认流失失败");
+            result.setMsg("修改失败");
             result.setCount(0L);
         }
         return result;

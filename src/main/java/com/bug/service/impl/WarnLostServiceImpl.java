@@ -81,6 +81,6 @@ public class WarnLostServiceImpl extends ServiceImpl<WarnLostMapper, WarnLost> i
 
     @Override
     public Boolean setResaon(int wid, String reason) {
-        return null;
+        return getBaseMapper().updatetReasonByID(wid,reason);
     }
 }
