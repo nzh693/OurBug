@@ -39,23 +39,44 @@ public class CustomerPlanController {
     /**
      * 获取当前登录用户被指派的计划
      */
-    @ApiOperation(value = "获取当前登录用户被指派的计划",notes = "新增一个销售机会")
+    @ApiOperation(value = "获取当前登录用户被指派的计划",notes = "获取当前登录用户被指派的计划")
     @GetMapping("/getCustomerPlans")
-    public ResponseResult<List<ChanceAndPlanVo>> getCustomerPlans(HttpServletRequest request){
+    public ResponseResult<List<CustomerPlan>> getCustomerPlans(@RequestParam(value = "page",defaultValue = "1") Integer page, @RequestParam(value = "limit",defaultValue = "10") Integer limit, HttpServletRequest request){
         // 获取当前登录的账号
 //        String account = (String) request.getSession().getAttribute("account");
         String account = "123456";
         // 只需要获取当前的账号
-        ResponseResult<List<ChanceAndPlanVo>> responseResult = customerPlanService.getChanceAndPlanVo(account);
+        ResponseResult<List<CustomerPlan>> responseResult = customerPlanService.getChanceAndPlanVo(page,limit,account);
         return responseResult;
     }
 
     @ApiOperation(value = "制定计划",notes = "制定开发计划")
     @ApiImplicitParam(name = "customerPlan",value = "开发计划")
-    @PutMapping("/makePlan")
-    public void makePlan(@RequestBody CustomerPlan customerPlan){
+    @PostMapping("/makePlan")
+    public ResponseResult<List<CustomerPlan>> makePlan(@RequestBody CustomerPlan customerPlan,HttpServletRequest request){
+        customerPlan.setUserid(1);
         customerPlanService.makePlan(customerPlan);
+        return new ResponseResult<>(0,"制定计划成功！",null);
     }
+
+    @ApiOperation(value = "获取计划详情",notes = "获取计划详情通过机会id")
+    @ApiImplicitParam(name = "chanceid",value = "机会id")
+    @GetMapping("/getPlanByChanceId")
+    public ResponseResult<CustomerPlan> getPlanByChanceId(@RequestParam("chanceid") Integer chanceid){
+        CustomerPlan customerPlan = customerPlanService.getPlanByChanceId(chanceid);
+        ResponseResult<CustomerPlan> responseResult = new ResponseResult<>(0,"成功",0,customerPlan);
+        return responseResult;
+    }
+
+    @ApiOperation(value = "开发结果",notes = "开发结果")
+    @ApiImplicitParam(name = "customerPlan",value = "开发计划")
+    @PutMapping("/developmentResult")
+    public ResponseResult<String> developmentResult(@RequestBody CustomerPlan customerPlan){
+        customerPlanService.developmentResult(customerPlan);
+        ResponseResult<String> responseResult = new ResponseResult<>(0,"成功！",null);
+        return responseResult;
+    }
+
 
 }
 

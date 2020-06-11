@@ -14,7 +14,7 @@
     </resultMap>
     <select id="getSaleChanceAndPlanVosByUserId" resultMap="chanceAndPlanVo">
        select
-            chance.id id,
+            DISTINCT chance.id id,
             customer_name,
             chance_from,
             telephone,
@@ -22,7 +22,8 @@
             description,
             plane.make_state make_state
        from sale_chance chance,customer_plan plane
-       where chance.userid=#{id} and chance.userid = plane.userid;
+       where chance.userid= #{id} and chance.userid = plane.userid
+			 LIMIT #{page},#{limit};
     </select>
 
 

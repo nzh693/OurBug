@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.Objects;
+
 /**
  * @ClassName ChanceAndPlanVo
  * @Description
@@ -19,6 +21,9 @@ import lombok.ToString;
 @ToString
 @Api(tags = "机会与计划类")
 public class ChanceAndPlanVo {
+
+//    @ApiModelProperty(value = "计划Id",name = "id",example = "1")
+//    private Integer id;
 
     @ApiModelProperty(value = "机会Id",name = "id",example = "1")
     private Integer id;
@@ -40,4 +45,15 @@ public class ChanceAndPlanVo {
 
     @ApiModelProperty(value = "计划是否制定",name = "makeState",example = "0-未制定，1-已制定")
     private Integer makeState;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ChanceAndPlanVo that = (ChanceAndPlanVo) o;
+        boolean isOK = (((ChanceAndPlanVo) o).getId() == id &&
+                ((ChanceAndPlanVo) o).getTelephone().equals(telephone)
+        );
+        return isOK;
+    }
 }
