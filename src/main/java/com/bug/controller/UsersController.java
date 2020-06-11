@@ -58,14 +58,15 @@ public class UsersController {
         conditions.put("account", username);
         conditions.put("password", password);
         qw.allEq(conditions);
+        System.out.println(usersService);
         Users u = usersService.getOne(qw);
         if(u != null) {
             request.getSession().setAttribute("signer", u);
             response.addCookie(new Cookie("username", username));
             response.addCookie(new Cookie("nickname", u.getNickname()));
-            return "index";
+            return "redirect:/";
         } else {
-            return "login";
+            return "redirect:/login";
         }
     }
 }

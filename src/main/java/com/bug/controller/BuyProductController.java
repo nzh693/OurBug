@@ -4,7 +4,6 @@ package com.bug.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.bug.entity.BuyProduct;
 import com.bug.entity.ContactRecord;
-import com.bug.entity.WarnLost;
 import com.bug.service.IBuyProductService;
 import com.bug.utils.ResultByList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,39 +86,22 @@ public class BuyProductController {
     @RequestMapping(path = "startScanRecord")
     public ResultByList startScanRecord(){
         ResultByList result = new ResultByList();
-        List<WarnLost> warnLost = buyProductService.createWarnLost();
-        if (warnLost==null){
-            result.setCode(1);
-            result.setMsg("生成预警信息失败");
-            result.setCount(0L);
-        }else {
-            result.setCode(0);
-            result.setMsg("生成预警信息成功");
-            result.setCount(Long.valueOf(warnLost.size()));
-            result.setData(warnLost);
-        }
+        QueryWrapper<ContactRecord> qw=new QueryWrapper<>();
         return result;
     }
 
     /**
-     * 每月1号凌晨3点系统自动触发： 从历史订单中扫描6个月没有下单的客户，并筛选出生成流失预警
+     * 每个天凌晨3点系统自动触发： 从历史订单中扫描6个月没有下单的客户，并筛选出生成流失预警
      * @return
      */
-    @Scheduled(cron = "0 0 3 1 * *")
+    @Scheduled(cron = "0/5 * * * * *")
     @RequestMapping(path = "autoStartScanRecord")
     public ResultByList autoStartScanRecord(){
         ResultByList result = new ResultByList();
-        List<WarnLost> warnLost = buyProductService.createWarnLost();
-        if (warnLost==null){
-            result.setCode(1);
-            result.setMsg("生成预警信息失败");
-            result.setCount(0L);
-        }else {
-            result.setCode(0);
-            result.setMsg("生成预警信息成功");
-            result.setCount(Long.valueOf(warnLost.size()));
-            result.setData(warnLost);
-        }
+        QueryWrapper<ContactRecord> qw=new QueryWrapper<>();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        System.out.println("test "+df.format(new Date()));// new Date()为获取当前系统时间
+
         return result;
     }
 

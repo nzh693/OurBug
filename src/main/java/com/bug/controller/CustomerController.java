@@ -13,12 +13,9 @@ import com.bug.utils.ResultByList;
 import javafx.scene.input.DataFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.spring.web.json.Json;
 
 import java.text.SimpleDateFormat;
@@ -35,7 +32,8 @@ import java.util.List;
  * @since 2020-06-09
  */
 @RestController
-@RequestMapping("api/v1/customer")
+@CrossOrigin
+@RequestMapping("api/v1")
 public class CustomerController {
 
     @Autowired
@@ -46,7 +44,7 @@ public class CustomerController {
      * @param customer 客户
      * @return  返回编辑结果：成功或失败
      */
-    @RequestMapping(path = "editCustomer")
+    @RequestMapping(path = "/customer", method = RequestMethod.PUT)
     public String editCustomer(Customer customer){
         ResultByList result=new ResultByList();
         List<String> list=new ArrayList<>();
@@ -64,29 +62,16 @@ public class CustomerController {
 
 
 
-    @RequestMapping(path = "getAllCustomers",method = RequestMethod.GET)
+    @RequestMapping(path = "/customers",method = RequestMethod.GET)
     public ResultByList getAllCustomers(){
         ResultByList result=new ResultByList();
         List<Customer> list=customerService.list();
         result.setCode(0);
         result.setMsg("返回所有的用户");
-        result.setCount(Long.valueOf(list.size()));
+        result.setCount((long) list.size());
         result.setData(list);
         return result;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

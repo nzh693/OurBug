@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -38,7 +39,6 @@ public class AdminController {
     public String sign(String username, String password, HttpServletResponse response, HttpServletRequest request) {
         System.out.println(username);
         System.out.println(password);
-
         System.out.println("AdminController ------------------sign");
         QueryWrapper<Admin> qw = new QueryWrapper<>();
         Map<String, String> conditions = new HashMap<>();
@@ -51,7 +51,7 @@ public class AdminController {
             request.getSession().setAttribute("signer", u);
             response.addCookie(new Cookie("username", username));
             response.addCookie(new Cookie("nickname", u.getName()));
-            return "index";
+            return "redirect:/";
         } else {
             return "forward:/users/sign";
         }
