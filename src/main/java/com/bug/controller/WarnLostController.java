@@ -5,6 +5,7 @@ import com.bug.entity.WarnLost;
 import com.bug.service.IWarnLostService;
 import com.bug.utils.ResultByList;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ import java.util.List;
  * @since 2020-06-11
  */
 @RestController
+@CrossOrigin
 @RequestMapping("api/v1/warnLost")
 public class WarnLostController {
 
@@ -67,6 +69,7 @@ public class WarnLostController {
             @RequestParam(value = "newStr",defaultValue = "未填写") String newStr){
         ResultByList result = new ResultByList();
         boolean re= warnLostService.UpdateMeasure(wid,newStr);
+        System.out.println("新增措施"+wid+newStr);
         if (re){
             result.setCode(0);
             result.setMsg("添加措施成功");

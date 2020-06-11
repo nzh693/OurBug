@@ -9,11 +9,13 @@ import com.bug.service.IBuyProductService;
 import com.bug.utils.ResultByList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -26,6 +28,7 @@ import java.util.List;
  * @since 2020-06-09
  */
 @RestController
+@CrossOrigin
 @RequestMapping("api/v1/buyProduct")
 public class BuyProductController {
 
@@ -38,21 +41,21 @@ public class BuyProductController {
      * @param cid
      * @return
      */
-    @RequestMapping(path = "getAllHistoryOrders",method = RequestMethod.GET)
-    public ResultByList getAllHistoryOrders(@RequestParam(value = "cid") int cid){
+    @RequestMapping(path = "getAllHistoryOrders")
+    public ResultByList getAllHistoryOrders(@RequestParam(value = "cid",defaultValue = "1") int cid){
         ResultByList result = new ResultByList();
         QueryWrapper<BuyProduct> qw=new QueryWrapper<>();
         qw.eq("customerid",cid);
         List<BuyProduct> list = buyProductService.list(qw);
         if (list==null||list.size()==0){
+            result.setCode(1);
+            result.setMsg("获取用户所有历时订单失败");
+            result.setCount(0L);
+        }else {
             result.setCode(0);
             result.setMsg("获取用户所有历时订单成功");
             result.setData(list);
             result.setCount(Long.valueOf(list.size()));
-        }else {
-            result.setCode(1);
-            result.setMsg("获取用户所有历时订单失败");
-            result.setCount(0L);
         }
         return result;
     }
@@ -63,10 +66,11 @@ public class BuyProductController {
      * @param bid
      * @return
      */
-    @RequestMapping(path = "delHistoryOrders",method = RequestMethod.DELETE)
+    @RequestMapping(path = "delHistoryOrders")
     public ResultByList delHistoryOrders(@RequestParam(value = "bid") int bid){
         ResultByList result = new ResultByList();
         boolean re = buyProductService.removeById(Long.valueOf(bid + ""));
+
         if (re){
             result.setCode(0);
             result.setMsg("删除成功");
@@ -78,6 +82,32 @@ public class BuyProductController {
         }
         return result;
     }
+
+
+    /**
+     * 批量删除获取客户的历时订单
+     * @param str
+     * @return
+     */
+    @RequestMapping(path = "delManyHistoryOrders")
+    @Transactional
+    public ResultByList delManyHistoryOrders(@RequestParam(value = "strs") String[] str){
+        ResultByList result = new ResultByList();
+        List<String> list = Arrays.asList(str);
+        boolean re = buyProductService.removeByIds(list);
+        if (re){
+            result.setCode(0);
+            result.setMsg("删除成功");
+            result.setCount(0L);
+        }else {
+            result.setCode(1);
+            result.setMsg("删除失败");
+            result.setCount(0L);
+        }
+        return result;
+    }
+
+
 
 
     /**
