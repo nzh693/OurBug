@@ -24,12 +24,8 @@ import java.util.List;
 @Service
 public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> implements ICustomerService {
 
-
-
     @Override
-    public Customer getCustomerById(Customer customer) {
-        return null;
+    public boolean updateState(int cid) {
+        return  getBaseMapper().updatetReasonByID(cid);
     }
-
-
 }

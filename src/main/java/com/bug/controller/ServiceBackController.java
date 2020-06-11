@@ -103,6 +103,7 @@ public class ServiceBackController {
         }
         sb.setState(1);
         ss.updateById(byId);
+        sback.updateById(sb);
         ResultByInteger rst = new ResultByInteger();
         rst.setCode(0);
 

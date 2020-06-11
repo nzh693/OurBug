@@ -1,5 +1,6 @@
 package com.bug.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.bug.entity.BuyProduct;
 import com.bug.entity.WarnLost;
 import com.bug.mapper.BuyProductMapper;
@@ -50,6 +51,9 @@ public class BuyProductServiceImpl extends ServiceImpl<BuyProductMapper, BuyProd
     @Transactional
     public List<WarnLost> createWarnLost() {
         String oldDate=Maketime(COMPARE_STARDARD);
+        QueryWrapper<WarnLost> qw = new QueryWrapper<>();
+        qw.gt("id",1);
+        getBaseMapper().deleteAllWarnInfo();//删除旧的预警记录
         List<Integer> cid=getBaseMapper().selectNoBuy(oldDate);//扫描获取客户id
         List<WarnLost> warnLosts=new ArrayList<>();
         Random random=new Random();
@@ -91,6 +95,33 @@ public class BuyProductServiceImpl extends ServiceImpl<BuyProductMapper, BuyProd
         date=strs[0]+"-"+strMonth+"-"+strs[2]+" "+strs[3]+":"+strs[4]+":"+strs[5];
         logger.info("前置后："+date);
         return date;
+    }
+
+    /**
+     * 按页面要求返回预警记录
+     * @param page 页码
+     * @param size 页大小
+     * @param warnLosts 所有数据
+     * @return
+     */
+    @Override
+    public List<WarnLost> getPageWarLost(int page,int size,List<WarnLost> warnLosts){
+        int total=warnLosts.size();
+        int sIndex,eIndex;
+        if (page*size>total){//请求页数超出范围
+            int tindex=--page*size;
+            if (tindex<total){//未超出尾页数据
+                sIndex=tindex;
+                return warnLosts.subList(sIndex,total-1);
+            }
+            return null;//超出尾页
+        }else {
+            sIndex=(page-1)*size;
+            eIndex=sIndex+size;
+            warnLosts=warnLosts.subList(sIndex,eIndex);
+        }
+
+        return warnLosts;
     }
 
 }

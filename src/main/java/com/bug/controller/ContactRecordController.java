@@ -8,10 +8,7 @@ import com.bug.service.IEventService;
 import com.bug.utils.ResultByList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -42,7 +39,7 @@ public class ContactRecordController {
      */
     @Transactional
     @ResponseBody
-    @RequestMapping(path = "addRecord")
+    @RequestMapping(path = "addRecord", method = RequestMethod.POST)
     public ResultByList  addRecord( @RequestBody String str){
         ResultByList result = new ResultByList();
         JSONObject jsonObject = JSONObject.parseObject(str);
@@ -62,7 +59,7 @@ public class ContactRecordController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(path = "editRecord")
+    @RequestMapping(path = "editRecord", method = RequestMethod.PUT)
     public ResultByList editRecord(ContactRecord record){
         ResultByList result=new ResultByList();
         ContactRecord contactRecord = new ContactRecord();

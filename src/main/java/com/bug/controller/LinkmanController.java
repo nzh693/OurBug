@@ -58,6 +58,22 @@ public class LinkmanController {
         return JSON.toJSONString(result);
     }
 
+    @ResponseBody
+    @RequestMapping(path = "linkmans",method = RequestMethod.GET)
+    public ResultByList getAllLinkmans(@RequestParam(value ="page" ,defaultValue = "1") Integer page
+            ,@RequestParam(value = "limit",defaultValue = "10") Integer limit){
+        ResultByList result=new ResultByList();
+        QueryWrapper<Linkman> qw = new QueryWrapper();
+        Page<Linkman> pageCustomer = linkmanService.page(new Page<Linkman>(page,limit), qw);
+//        List<Linkman> linkmanByPage = linkmanService.list();
+        result.setCode(0);
+        result.setData(pageCustomer.getRecords());//填充分页数据
+        result.setCount(pageCustomer.getTotal());
+        return result;
+    }
+
+
+
     /**
      * 提交修改联系人的表单
      * @param linkman
@@ -109,7 +125,7 @@ public class LinkmanController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(path = "y",method = RequestMethod.POST)
+    @RequestMapping(path = "addLinkeman",method = RequestMethod.POST)
     public String addLinkeman( Linkman linkman){
         ResultByList result=new ResultByList();
 
