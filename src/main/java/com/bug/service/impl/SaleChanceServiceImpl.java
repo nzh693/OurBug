@@ -66,7 +66,7 @@ public class SaleChanceServiceImpl extends ServiceImpl<SaleChanceMapper, SaleCha
         }
         Page<SaleChance> saleChancePage = baseMapper.selectPage(pageSaleChance, wrapper);
         List<SaleChance> saleChances = saleChancePage.getRecords();
-        ResponseResult<List<SaleChance>> responseResult = new ResponseResult<>(0,"查询成功",saleChances.size(),saleChances);
+        ResponseResult<List<SaleChance>> responseResult = new ResponseResult<List<SaleChance>>(0,"查询成功",(int)saleChancePage.getTotal(),saleChances);
         return responseResult;
     }
 
@@ -102,9 +102,15 @@ public class SaleChanceServiceImpl extends ServiceImpl<SaleChanceMapper, SaleCha
         // 创建开发计划
         CustomerPlan customerPlan = new CustomerPlan();
         customerPlan.setChanceid(saleChanceId);  // 销售机会id
-        customerPlan.setUserId(userId);  // 客户经理id
-        customerPlan.setState(0);   // 未制定计划
+        customerPlan.setUserid(userId);  // 客户经理id
+        customerPlan.setMakeState(0);   // 未制定计划
         customerPlan.setProgress(0);  // 进度为0
+        customerPlan.setCustomerName(saleChance.getCustomerName());
+        customerPlan.setTelephone(saleChance.getTelephone());
+        customerPlan.setChanceFrom(saleChance.getChanceFrom());
+        customerPlan.setSummary(saleChance.getSummary());
+        customerPlan.setDescription(saleChance.getDescription());
+        customerPlan.setState(saleChance.getState());
         customerPlanService.save(customerPlan);
         return saleChance;
     }
@@ -118,9 +124,17 @@ public class SaleChanceServiceImpl extends ServiceImpl<SaleChanceMapper, SaleCha
     }
 
     @Override
-    public List<ChanceAndPlanVo> getSaleChanceAndPlanVosByUserId(Integer id) {
-        List<ChanceAndPlanVo> chanceAndPlanVos = getBaseMapper().getSaleChanceAndPlanVosByUserId(id);
+    public List<ChanceAndPlanVo> getSaleChanceAndPlanVosByUserId(Integer page, Integer limit,Integer id) {
+        page = (page - 1) * limit;
+        List<ChanceAndPlanVo> chanceAndPlanVos = getBaseMapper().getSaleChanceAndPlanVosByUserId(page,limit,id);
         return chanceAndPlanVos;
+    }
+
+    @Override
+    public List<CustomerPlan> getCustomerPlan(Integer page, Integer limit, Integer id) {
+        Page<CustomerPlan> customerPlanPage = new Page<>(page,limit);
+        QueryWrapper<CustomerPlan> queryWrapper = new QueryWrapper<>();
+        return null;
     }
 
 

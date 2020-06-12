@@ -1,16 +1,13 @@
 package com.bug.controller;
 
-
+import com.alibaba.fastjson.JSONObject;
 import com.bug.entity.WarnLost;
 import com.bug.service.IWarnLostService;
 import com.bug.utils.ResultByList;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -22,6 +19,7 @@ import java.util.List;
  * @since 2020-06-11
  */
 @RestController
+@CrossOrigin
 @RequestMapping("api/v1/warnLost")
 public class WarnLostController {
 
@@ -35,8 +33,8 @@ public class WarnLostController {
      * @param limit
      * @return
      */
-    @RequestMapping(path = "getRecordByPage")
-    public ResultByList getRecordByPage(@RequestParam(value = "page",defaultValue = "1") int page,
+    @RequestMapping(path = "getWarnByPage")
+    public ResultByList getWarnByPage(@RequestParam(value = "page",defaultValue = "1") int page,
                                         @RequestParam(value = "limit",defaultValue = "10") int limit){
         ResultByList re = new ResultByList();
         List<WarnLost> warnLost =warnLostService.getWarnByPage(page,limit);
@@ -67,6 +65,7 @@ public class WarnLostController {
             @RequestParam(value = "newStr",defaultValue = "未填写") String newStr){
         ResultByList result = new ResultByList();
         boolean re= warnLostService.UpdateMeasure(wid,newStr);
+        System.out.println("新增措施"+wid+newStr);
         if (re){
             result.setCode(0);
             result.setMsg("添加措施成功");
@@ -80,15 +79,14 @@ public class WarnLostController {
     }
 
     /**
-     * 确认流失
+     * 确认流失，修改状态
      * @param wid  预警记录id
-     * @param reason 流失原因
      * @return
      */
     @RequestMapping(value = "confirmLost")
-    public ResultByList confirmLost(int wid,String reason){
+    public ResultByList confirmLost(int wid){
         ResultByList result = new ResultByList();
-        Boolean re = warnLostService.confirmLost(wid, reason);
+        Boolean re = warnLostService.confirmLost(wid);
         if(re){
             result.setCode(0);
             result.setMsg("确认流失成功");
@@ -96,6 +94,30 @@ public class WarnLostController {
         }else {
             result.setCode(0);
             result.setMsg("确认流失失败");
+            result.setCount(0L);
+        }
+        return result;
+    }
+
+    /**
+     * 修改流失原因
+     * @param str json{id,reason}
+     * @return
+     */
+    @RequestMapping(value = "setReason")
+    public ResultByList setReason(@RequestBody String str){
+        JSONObject jsonObject = JSONObject.parseObject(str);
+        ResultByList result = new ResultByList();
+        Integer id=Integer.valueOf(jsonObject.getString("id"));
+        String reason= jsonObject.getString("reason");
+        Boolean re = warnLostService.setResaon(id,reason);
+        if(re){
+            result.setCode(0);
+            result.setMsg("修改成功");
+            result.setCount(0L);
+        }else {
+            result.setCode(0);
+            result.setMsg("修改失败");
             result.setCount(0L);
         }
         return result;

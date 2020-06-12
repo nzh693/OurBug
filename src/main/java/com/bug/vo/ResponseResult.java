@@ -22,4 +22,8 @@ public class ResponseResult<T> {
     public ResponseResult(T data){
         this(0,"成功",0,data);
     }
+
+    public ResponseResult(Integer code, String msg,T data){
+        this(code,msg,0,data);
+    }
 }

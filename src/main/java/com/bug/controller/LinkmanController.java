@@ -2,8 +2,6 @@ package com.bug.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.bug.entity.Linkman;
 import com.bug.service.ILinkmanService;
@@ -15,9 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.print.DocFlavor;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**

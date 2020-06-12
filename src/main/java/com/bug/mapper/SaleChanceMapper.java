@@ -3,6 +3,7 @@ package com.bug.mapper;
 import com.bug.entity.SaleChance;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.bug.vo.ChanceAndPlanVo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -16,5 +17,7 @@ import java.util.List;
  */
 public interface SaleChanceMapper extends BaseMapper<SaleChance> {
 
-    List<ChanceAndPlanVo> getSaleChanceAndPlanVosByUserId(Integer id);
+    List<ChanceAndPlanVo> getSaleChanceAndPlanVosByUserId(@Param("page") Integer page, @Param("limit") Integer limit, @Param("id") Integer id);
+
+//    List<ChanceAndPlanVo> getSaleChanceAndPlanVosByUserId(Integer page, Integer limit, Integer id);
 }

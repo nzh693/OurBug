@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 /**
  * <p>
  *  前端控制器
@@ -38,15 +40,14 @@ public class ContactRecordController {
      * @return
      */
     @Transactional
-    @ResponseBody
-    @RequestMapping(path = "addRecord", method = RequestMethod.POST)
+    @RequestMapping(path = "addRecord")
     public ResultByList  addRecord( @RequestBody String str){
         ResultByList result = new ResultByList();
         JSONObject jsonObject = JSONObject.parseObject(str);
         int sid=Integer.valueOf(jsonObject.getString("sid"));
         ContactRecord contactRecord = JSONObject.parseObject(jsonObject.get("contactRecord").toString(), ContactRecord.class);
         Event event = JSONObject.parseObject(jsonObject.get("event").toString(), Event.class);
-        contactRecordService.saveOrUpdate(contactRecord);
+        contactRecordService.save(contactRecord);
         eventService.save(event);
         result.setMsg("添加成功");
         result.setCount(0L);
@@ -55,28 +56,22 @@ public class ContactRecordController {
 
     /**
      * 修改客户来往记录
-     * @param record
+     * 日期格式为年月日 / -
+     * @param
      * @return
      */
-    @ResponseBody
-    @RequestMapping(path = "editRecord", method = RequestMethod.PUT)
-    public ResultByList editRecord(ContactRecord record){
-        ResultByList result=new ResultByList();
-        ContactRecord contactRecord = new ContactRecord();
-        contactRecord.setId(1);
-        contactRecord.setComment("你好");
-        boolean re = contactRecordService.saveOrUpdate(contactRecord);
-        if (re){
-            result.setMsg("编辑成功");
-            result.setCode(0);
-            result.setCount(0L);
-        }else {
-            result.setMsg("编辑失败");
-            result.setCode(1);
-            result.setCount(0L);
-        }
-        return result;
 
+    @Transactional
+    @RequestMapping(path = "editRecord")
+    public ResultByList editRecord(@RequestBody String strs){
+        ResultByList result=new ResultByList();
+        Map<String, Object> map = contactRecordService.convertParamter(strs);
+        contactRecordService.updateById((ContactRecord)map.get("contactRecord"));
+        eventService.updateById((Event) map.get("event"));
+        result.setMsg("编辑成功");
+        result.setCode(1);
+        result.setCount(0L);
+        return result;
     }
 
 
