@@ -76,6 +76,7 @@ public class WarnLostServiceImpl extends ServiceImpl<WarnLostMapper, WarnLost> i
     public Boolean confirmLost(int wid) {
         int cid=getBaseMapper().selectCustomerIdByWarnId(wid);
         //修改预警信息状态
+        getBaseMapper().updatetStateByID(wid);
         return customerService.updateState(cid);
     }
 

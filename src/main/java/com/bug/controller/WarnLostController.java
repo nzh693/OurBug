@@ -86,6 +86,7 @@ public class WarnLostController {
     @RequestMapping(value = "confirmLost")
     public ResultByList confirmLost(int wid){
         ResultByList result = new ResultByList();
+        System.out.println(wid);
         Boolean re = warnLostService.confirmLost(wid);
         if(re){
             result.setCode(0);
@@ -105,7 +106,8 @@ public class WarnLostController {
      * @return
      */
     @RequestMapping(value = "setReason")
-    public ResultByList setReason(@RequestBody String str){
+    public ResultByList setReason(@RequestBody() String str){
+        System.out.println("setReason"+str);
         JSONObject jsonObject = JSONObject.parseObject(str);
         ResultByList result = new ResultByList();
         Integer id=Integer.valueOf(jsonObject.getString("id"));

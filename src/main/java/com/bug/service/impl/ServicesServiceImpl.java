@@ -23,6 +23,8 @@ public class ServicesServiceImpl extends ServiceImpl<ServicesMapper, Services> i
     @Override
     public List<ServiceTableResult> getAllContent(Integer start,  Integer end) {
         System.out.println("---------getAllContent()");
+        System.out.println(start);
+        System.out.println(end);
         List l = getBaseMapper().getAllContent(start, end);
         System.out.println(l);
         return getBaseMapper().getAllContent(start, end);

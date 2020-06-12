@@ -46,7 +46,12 @@ public class BuyProductController {
         ResultByList result = new ResultByList();
         QueryWrapper<BuyProduct> qw=new QueryWrapper<>();
         qw.eq("customerid",cid);
-        List<BuyProduct> list = buyProductService.list(qw);
+        List<BuyProduct> list=null;
+        if (cid==1){
+            list= buyProductService.list();
+        }else {
+            list= buyProductService.list(qw);
+        }
         if (list==null||list.size()==0){
             result.setCode(1);
             result.setMsg("获取用户所有历时订单失败");

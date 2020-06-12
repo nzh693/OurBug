@@ -24,9 +24,12 @@ public interface WarnLostMapper extends BaseMapper<WarnLost> {
     @Update("update warn_lost w set w.measure=#{measure} where w.id=#{wid}")
     public boolean updatetMeasureByID(@Param("wid") int wid, @Param("measure") String measure);
 
-    @Update("update warn_lost w set w.lost_reason=#{reason},w.state=0  where w.id=#{wid}")
+    @Update("update warn_lost w set w.lost_reason=#{reason}  where w.id=#{wid}")
     public boolean updatetReasonByID(@Param("wid") int wid, @Param("reason") String reason);
 
+
+    @Update("update warn_lost w set w.state=0  where  w.id=#{wid}")
+    public boolean updatetStateByID(@Param("wid") int wid);
 
     @Select("select customerid from warn_lost where id=#{wid}")
     public Integer selectCustomerIdByWarnId(int wid);

@@ -62,7 +62,7 @@ public class BuyProductServiceImpl extends ServiceImpl<BuyProductMapper, BuyProd
             Integer lid = random.nextInt(20);
             String nowDate=simpleDateFormat.format(new Date());
             WarnLost warnLost = new WarnLost(uid, lid,nowDate , 1, null,
-                    null, null, "张三", i);
+                    null, null, "文与可"+String.valueOf(i), i);
             warnLostService.save(warnLost);
             warnLosts.add(warnLost);
         }

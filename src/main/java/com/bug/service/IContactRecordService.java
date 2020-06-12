@@ -3,6 +3,7 @@ package com.bug.service;
 import com.bug.entity.ContactRecord;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import javax.print.DocFlavor;
 import java.util.Map;
 
 /**
@@ -20,7 +21,7 @@ public interface IContactRecordService extends IService<ContactRecord> {
      * @param strs
      * @return
      */
-    public Map<String,Object> convertParamter(String strs);
+    public Map<String,Object> convertParamter(String id, String customerid ,String time,String place,String detail,String comment,String schema);
 
 
 

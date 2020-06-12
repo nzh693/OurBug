@@ -9,6 +9,7 @@ import com.bug.service.IContactRecordService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
@@ -28,32 +29,32 @@ import java.util.Map;
  */
 @Service
 public class ContactRecordServiceImpl extends ServiceImpl<ContactRecordMapper, ContactRecord> implements IContactRecordService {
-    private final static String DATE_FORMAT="yyyy-MM-dd HH:mm:ss";//时间格式
-    private Logger logger= LoggerFactory.getLogger(ContactRecordServiceImpl.class);
-    private static SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT);
+
+
 
     @Override
-    public Map<String, Object> convertParamter(String strs) {
+    public Map<String, Object> convertParamter(String id, String customerid, String time, String place, String detail, String comment,String schema) {
         Map<String, Object> map = new HashMap<>();
-        JSONObject jo = JSONObject.parseObject(strs);
         ContactRecord contactRecord = new ContactRecord();
         Event event = new Event();
-        contactRecord.setComment(jo.getString("comment"));
-        contactRecord.setCustomerid(Integer.valueOf(jo.getString("customerid") ));
-        contactRecord.setTime(jo.getString("time"));
-        contactRecord.setId(Integer.valueOf(jo.getString("id")));
-        event.setComment(jo.getString("comment"));
-        event.setSumary(jo.getString("schema"));
-        event.setDetail(jo.getString("detail"));
-        event.setPlace(jo.getString("place"));
-        event.setId(Integer.valueOf(jo.getString("id")));
-        event.setRecordId(Integer.valueOf(jo.getString("id")));
-        String[] strTimes=jo.getString("time").split("-");//  需要转义的特殊符号【* ^ : | . \】
+        contactRecord.setComment(comment);
+        contactRecord.setCustomerid(Integer.valueOf(customerid));
+        contactRecord.setTime(time);
+        contactRecord.setId(Integer.valueOf(id));
+        event.setComment(comment);
+        event.setSumary(schema);
+        event.setDetail(detail);
+        event.setPlace(place);
+        event.setId(Integer.valueOf(id));
+        event.setRecordId(Integer.valueOf(id));
+        String[] strTimes=time.split("-");//  需要转义的特殊符号【* ^ : | . \】
         event.setTime(LocalDateTime.of(Integer.valueOf(strTimes[0]),Integer.valueOf(strTimes[1]),
                 Integer.valueOf(strTimes[2]),0,
                 0,0));
         map.put("event",event);
         map.put("contactRecord",contactRecord);
+        System.out.println("记录 "+contactRecord);
+        System.out.println("实践 "+event);
         return map;
     }
 }

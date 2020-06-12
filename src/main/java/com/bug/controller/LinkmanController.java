@@ -8,10 +8,7 @@ import com.bug.service.ILinkmanService;
 import com.bug.utils.ResultByList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,6 +21,7 @@ import java.util.List;
  * @since 2020-06-09
  */
 @Controller
+@CrossOrigin
 @RequestMapping("api/v1/linkman")
 public class LinkmanController {
 
@@ -36,12 +34,17 @@ public class LinkmanController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(path = "getLinkMans",method = RequestMethod.GET)
-    public String getAllLinkmans(Integer cid,@RequestParam(value ="page" ,defaultValue = "1") Integer page
+    @RequestMapping(path = "getLinkmans")
+    public ResultByList getLinkmans(@RequestParam(value ="cid" ,defaultValue = "0")Integer cid,@RequestParam(value ="page" ,defaultValue = "1") Integer page
             ,@RequestParam(value = "limit",defaultValue = "8") Integer limit){
         ResultByList result=new ResultByList();
-        List<Linkman> linkmanByPage = linkmanService.getLinkmanByPage(cid, page, limit);
-        if(linkmanByPage!=null){//数据范围内，最后一页未处理
+        List<Linkman> linkmanByPage;
+        if (cid==0){
+             linkmanByPage= linkmanService.list();
+        }else {
+             linkmanByPage= linkmanService.getLinkmanByPage(cid, page, limit);
+        }
+        if(linkmanByPage!=null){
             result.setCode(0);
             result.setData(linkmanByPage);//填充分页数据
             result.setCount(Long.valueOf(linkmanByPage.size()));
@@ -50,12 +53,12 @@ public class LinkmanController {
             result.setMsg("没有数据了");//填充分页数据
             result.setCount(0L);
         }
-        return JSON.toJSONString(result);
+        return result;
     }
 
     @ResponseBody
-    @RequestMapping(path = "linkmans",method = RequestMethod.GET)
-    public ResultByList getAllLinkmans(@RequestParam(value ="page" ,defaultValue = "1") Integer page
+    @RequestMapping(path = "getAllLinkmansByPage")
+    public ResultByList getAllLinkmansByPage(@RequestParam(value ="page" ,defaultValue = "1") Integer page
             ,@RequestParam(value = "limit",defaultValue = "10") Integer limit){
         ResultByList result=new ResultByList();
         QueryWrapper<Linkman> qw = new QueryWrapper();
@@ -68,40 +71,17 @@ public class LinkmanController {
     }
 
 
-
-    /**
-     * 提交修改联系人的表单
-     * @param linkman
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping(path = "editLinkMan",method = RequestMethod.POST)
-    public String editcustomer(Linkman linkman){
-        ResultByList result=new ResultByList();
-        boolean re = linkmanService.saveOrUpdate(linkman);
-        if (re){
-            result.setCode(0);
-            result.setMsg("修改成功");
-            result.setCount(0L);
-        }else {
-            result.setCode(1);
-            result.setMsg("修改失败");
-            result.setCount(0L);
-        }
-        return JSON.toJSONString(result);
-    }
-
     /**
      * 删除客户的一个联系人
-     * @param lid
+     * @param id
      * @return
      */
     @ResponseBody
-    @RequestMapping(path = "deleteLinkeman",method = RequestMethod.DELETE)
-    public String deleteLinkeman(@RequestParam(value = "lid") int lid){
-
+    @RequestMapping(path = "deleteLinkeman")
+    public ResultByList deleteLinkeman(@RequestParam(value = "id") int id){
         ResultByList result=new ResultByList();
-        boolean re = linkmanService.removeById(Long.valueOf(lid));
+        System.out.println(id);
+        boolean re = linkmanService.removeById(Long.valueOf(id));
         if (re){
             result.setCode(0);
             result.setMsg("删除成功");
@@ -111,7 +91,7 @@ public class LinkmanController {
             result.setMsg("删除失败");
             result.setCount(0L);
         }
-        return JSON.toJSONString(result);
+        return result;
     }
 
     /**
@@ -120,14 +100,10 @@ public class LinkmanController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(path = "addLinkeman",method = RequestMethod.POST)
+    @RequestMapping(path = "addLinkeman")
     public String addLinkeman( Linkman linkman){
         ResultByList result=new ResultByList();
-
-        Linkman linkman1=new Linkman();
-        linkman1.setName("wbl");
-        linkman1.setComment("a ");
-        boolean re = linkmanService.saveOrUpdate(linkman1);
+        boolean re = linkmanService.save(linkman);
         if (re){
             result.setCode(0);
             result.setMsg("添加成功");
@@ -139,6 +115,33 @@ public class LinkmanController {
         }
         return JSON.toJSONString(result);
     }
+
+
+    /**
+     * 为客户添加一个联系人
+     * @param linkman
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(path = "editLinkMan")
+    public String editLinkMan( Linkman linkman){
+        ResultByList result=new ResultByList();
+        System.out.println("修改联系人"+linkman);
+        boolean re = linkmanService.updateById(linkman);
+        if (re){
+            result.setCode(0);
+            result.setMsg("添加成功");
+            result.setCount(0L);
+        }else {
+            result.setCode(1);
+            result.setMsg("添加失败");
+            result.setCount(0L);
+        }
+        return JSON.toJSONString(result);
+    }
+
+
+
 
 
 

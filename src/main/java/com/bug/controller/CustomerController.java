@@ -66,7 +66,7 @@ public class CustomerController {
 
 
 
-    @RequestMapping(path = "/getAllCustomers")
+    @RequestMapping(path = "/customers")
     public ResultByList getAllCustomers(){
         ResultByList result=new ResultByList();
         List<Customer> list=customerService.list();

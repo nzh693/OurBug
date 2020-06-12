@@ -1,18 +1,22 @@
 package com.bug.vo;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
+
 
 public class RecordAndEvent {
 
     private int id;
     private int  customerid;
-    private LocalTime time;
+    private String time;
     private String place;
     private String schema;
     private String  detail;
     private String  comment;
+    public RecordAndEvent(){
 
-    public RecordAndEvent(int id, int customerid, LocalTime time, String place, String schema, String detail, String comment) {
+    }
+
+    public RecordAndEvent(int id, int customerid, String time, String place, String schema, String detail, String comment) {
         this.id = id;
         this.customerid = customerid;
         this.time = time;
@@ -38,11 +42,11 @@ public class RecordAndEvent {
         this.customerid = customerid;
     }
 
-    public LocalTime getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(LocalTime time) {
+    public void setTime(String time) {
         this.time = time;
     }
 

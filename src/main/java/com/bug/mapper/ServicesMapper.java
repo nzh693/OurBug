@@ -3,6 +3,7 @@ package com.bug.mapper;
 import com.bug.entity.Services;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.bug.vo.ServiceTableResult;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ import java.util.List;
  */
 public interface ServicesMapper extends BaseMapper<Services> {
 
-    List<ServiceTableResult> getAllContent(Integer start, Integer end);
+    List<ServiceTableResult> getAllContent(@Param("start") Integer start, @Param("end") Integer end);
 
 
     Integer getTotal();
