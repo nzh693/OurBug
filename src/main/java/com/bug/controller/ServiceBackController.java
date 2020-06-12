@@ -94,19 +94,26 @@ public class ServiceBackController {
     @Transactional
     @PutMapping("serviceback")
     public @ResponseBody ResultByInteger insertServiceBack(@RequestBody ServiceBack sb) {
-        Services byId = ss.getById(sb.getServiceid());
-        if(sb.getSatisfaction() < 3) {
-            byId.setState(1);
-        } else {
-            byId.setState(3);
-            sback.save(sb);
-        }
-        sb.setState(1);
-        ss.updateById(byId);
-        sback.updateById(sb);
-        ResultByInteger rst = new ResultByInteger();
-        rst.setCode(0);
+        System.out.println(sb);
 
+        ResultByInteger rst = new ResultByInteger();
+        try {
+            Services byId = ss.getById(sb.getServiceid());
+            assert byId != null;
+            if(sb.getSatisfaction() < 3) {
+                byId.setState(1);
+            } else {
+                byId.setState(3);
+//            sback.save(sb);
+                sback.updateById(sb);
+            }
+            sb.setState(1);
+            ss.updateById(byId);
+            sback.updateById(sb);
+            rst.setCode(0);
+        } catch (Exception e) {
+            rst.setCode(1);
+        }
         return rst;
     }
 

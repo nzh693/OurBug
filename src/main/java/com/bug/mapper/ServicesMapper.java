@@ -16,5 +16,9 @@ import java.util.List;
  */
 public interface ServicesMapper extends BaseMapper<Services> {
 
-    List<ServiceTableResult> getAllContent();
+    List<ServiceTableResult> getAllContent(Integer start, Integer end);
+
+
+    Integer getTotal();
+
 }

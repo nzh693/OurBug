@@ -16,5 +16,7 @@ import java.util.List;
  */
 public interface IServicesService extends IService<Services> {
 
-    List<ServiceTableResult> getAllContent();
+//    List<ServiceTableResult> getAllContent();
+    List<ServiceTableResult> getAllContent(Integer start, Integer end);
+    Integer getTotal();
 }

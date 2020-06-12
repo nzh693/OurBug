@@ -21,7 +21,17 @@ import java.util.List;
 public class ServicesServiceImpl extends ServiceImpl<ServicesMapper, Services> implements IServicesService {
 
     @Override
-    public List<ServiceTableResult> getAllContent() {
-        return getBaseMapper().getAllContent();
+    public List<ServiceTableResult> getAllContent(Integer start,  Integer end) {
+        System.out.println("---------getAllContent()");
+        List l = getBaseMapper().getAllContent(start, end);
+        System.out.println(l);
+        return getBaseMapper().getAllContent(start, end);
     }
+
+    @Override
+    public Integer getTotal() {
+        return getBaseMapper().getTotal();
+    }
+
+
 }
