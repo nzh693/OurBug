@@ -72,6 +72,11 @@ public class Services extends Model<Services> {
     private String serviceDispose;
 
     /**
+     *  客户id
+     */
+    private Integer customerId;
+
+    /**
      * 分配时间
      */
     @ApiModelProperty("分配时间")
@@ -150,23 +155,33 @@ public class Services extends Model<Services> {
         this.allocationTime = allocationTime;
     }
 
+    public Integer getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
+    }
+
     @Override
     protected Serializable pkVal() {
         return this.id;
     }
 
+
     @Override
     public String toString() {
         return "Services{" +
-        "id=" + id +
-        ", type=" + type +
-        ", userid=" + userid +
-        ", createTime=" + createTime +
-        ", dealUserid=" + dealUserid +
-        ", state=" + state +
-        ", serviceContent=" + serviceContent +
-        ", serviceDispose=" + serviceDispose +
-        ", allocationTime=" + allocationTime +
-        "}";
+                "id=" + id +
+                ", type=" + type +
+                ", userid=" + userid +
+                ", createTime=" + createTime +
+                ", dealUserid=" + dealUserid +
+                ", state=" + state +
+                ", serviceContent='" + serviceContent + '\'' +
+                ", serviceDispose='" + serviceDispose + '\'' +
+                ", customerId=" + customerId +
+                ", allocationTime=" + allocationTime +
+                '}';
     }
 }

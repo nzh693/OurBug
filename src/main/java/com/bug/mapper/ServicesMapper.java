@@ -2,6 +2,9 @@ package com.bug.mapper;
 
 import com.bug.entity.Services;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.bug.vo.ServiceTableResult;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +15,10 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2020-06-09
  */
 public interface ServicesMapper extends BaseMapper<Services> {
+
+    List<ServiceTableResult> getAllContent(Integer start, Integer end);
+
+
+    Integer getTotal();
 
 }

@@ -4,7 +4,10 @@ import com.bug.entity.Services;
 import com.bug.mapper.ServicesMapper;
 import com.bug.service.IServicesService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.bug.vo.ServiceTableResult;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -16,5 +19,19 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ServicesServiceImpl extends ServiceImpl<ServicesMapper, Services> implements IServicesService {
+
+    @Override
+    public List<ServiceTableResult> getAllContent(Integer start,  Integer end) {
+        System.out.println("---------getAllContent()");
+        List l = getBaseMapper().getAllContent(start, end);
+        System.out.println(l);
+        return getBaseMapper().getAllContent(start, end);
+    }
+
+    @Override
+    public Integer getTotal() {
+        return getBaseMapper().getTotal();
+    }
+
 
 }

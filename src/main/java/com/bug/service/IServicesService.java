@@ -2,6 +2,9 @@ package com.bug.service;
 
 import com.bug.entity.Services;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.bug.vo.ServiceTableResult;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IServicesService extends IService<Services> {
 
+//    List<ServiceTableResult> getAllContent();
+    List<ServiceTableResult> getAllContent(Integer start, Integer end);
+    Integer getTotal();
 }

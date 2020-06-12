@@ -32,11 +32,16 @@ public interface IWarnLostService extends IService<WarnLost> {
     public Boolean UpdateMeasure(int wid,String newStr);
 
     /**
-     * 确认客户流失，在预警信息表里面填写流失原因，在客户表修改客户的状态。
+     * 确认客户流失，在客户表修改客户的状态，记录表修改状态
      * @param wid
-     * @param reason
      * @return
      */
-    public Boolean confirmLost(int wid,String reason);
+    public Boolean confirmLost(int wid);
 
+    /**
+     * 确认客户流失，在客户表修改客户的状态，记录表修改状态
+     * @param wid
+     * @return
+     */
+    public Boolean setResaon(int wid,String reason);
 }
