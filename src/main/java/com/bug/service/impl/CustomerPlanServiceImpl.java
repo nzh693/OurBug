@@ -16,6 +16,7 @@ import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -43,14 +44,14 @@ public class CustomerPlanServiceImpl extends ServiceImpl<CustomerPlanMapper, Cus
     private ICustomerPlanService customerPlanService;
 
     @Override
-    public ResponseResult<List<CustomerPlan>> getChanceAndPlanVo(Integer page, Integer limit,String account) {
+    public ResponseResult<List<CustomerPlan>> getChanceAndPlanVo(Integer page, Integer limit,String account,String customerName) {
         // 查询这个客户经理是否存在
         Users user = usersService.getUserByAccount(account, 1);
         if(user != null){
             // 客户经理id
             Integer id = user.getId();
             // 根据客户经理id获取 - 指派给他的机会
-            ResponseResult<List<CustomerPlan>> responseResult = customerPlanService.getCustomerPlan(page,limit,id);
+            ResponseResult<List<CustomerPlan>> responseResult = customerPlanService.getCustomerPlan(page,limit,id,customerName);
             return responseResult;
         }
         return null;
@@ -62,10 +63,15 @@ public class CustomerPlanServiceImpl extends ServiceImpl<CustomerPlanMapper, Cus
     }
 
     @Override
-    public ResponseResult<List<CustomerPlan>>  getCustomerPlan(Integer page, Integer limit, Integer id) {
+    public ResponseResult<List<CustomerPlan>>  getCustomerPlan(Integer page, Integer limit, Integer id,String customerName) {
         Page<CustomerPlan> customerPlanPage = new Page<>(page,limit);
         QueryWrapper<CustomerPlan> wrapper = new QueryWrapper<>();
         wrapper.eq("userid",id);
+        if(!StringUtils.isEmpty(customerName)){
+            if(!customerName.equals("xjsnb")){
+                wrapper.like("customer_name",customerName);
+            }
+        }
         Page<CustomerPlan> customerPlanPage1 = baseMapper.selectPage(customerPlanPage, wrapper);
         List<CustomerPlan> records = customerPlanPage1.getRecords();
         int total = (int) customerPlanPage1.getTotal();
@@ -83,7 +89,9 @@ public class CustomerPlanServiceImpl extends ServiceImpl<CustomerPlanMapper, Cus
 
     @Override
     public void developmentResult(CustomerPlan customerPlan) {
-        makePlan(customerPlan);
+        QueryWrapper<CustomerPlan> wrapper = new QueryWrapper<>();
+        wrapper.eq("chanceid",customerPlan.getChanceid());
+        baseMapper.update(customerPlan,wrapper);
         SaleChance saleChance = saleChanceService.getById(customerPlan.getChanceid());
         saleChance.setState(customerPlan.getState());
         saleChanceService.updateById(saleChance);

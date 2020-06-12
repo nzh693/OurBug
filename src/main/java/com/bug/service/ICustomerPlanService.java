@@ -19,11 +19,11 @@ public interface ICustomerPlanService extends IService<CustomerPlan> {
 
     void makePlan(CustomerPlan customerPlan);
 
-    ResponseResult<List<CustomerPlan>> getChanceAndPlanVo(Integer page, Integer limit, String account);
+    ResponseResult<List<CustomerPlan>> getChanceAndPlanVo(Integer page, Integer limit, String account,String customerName);
 
     Integer getCountByUserId(Integer id);
 
-    ResponseResult<List<CustomerPlan>> getCustomerPlan(Integer page, Integer limit, Integer id);
+    ResponseResult<List<CustomerPlan>> getCustomerPlan(Integer page, Integer limit, Integer id,String customer);
 
     CustomerPlan getPlanByChanceId(Integer chanceid);
 

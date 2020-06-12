@@ -1,7 +1,10 @@
 package com.bug.controller;
 
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.bug.entity.Customer;
 import com.bug.entity.SaleChance;
+import com.bug.service.ICustomerService;
 import com.bug.service.ISaleChanceService;
 import com.bug.vo.ChanceAndUserVo;
 import com.bug.vo.ResponseResult;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @ClassName SaleChanceController
@@ -99,6 +103,7 @@ public class SaleChanceController {
     @ApiImplicitParam(name = "saleChance",value = "销售机会")
     @PutMapping("/updateSaleChance")
     public ResponseResult<String> updateSaleChance(@RequestBody SaleChance saleChance){
+        System.out.println("熊劲松天下第一");
         ResponseResult<String> responseResult = null;
         if(saleChance.getId() == null){  // id不存在不是修改
             responseResult = new ResponseResult<>(1,"机会不存在，修改失败！",null);
@@ -143,7 +148,45 @@ public class SaleChanceController {
         return responseResult;
     }
 
+    @Autowired
+    private ICustomerService customerService;
 
+
+    /**
+     * 添加数据专用 - 慎用
+     * @param page
+     * @param limit
+     */
+    @ApiOperation(value = "添加数据专用 - 慎用",notes = "添加数据专用 - 慎用")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page",value = "当前页",dataType = "Integer"),
+            @ApiImplicitParam(name = "limit",value = "每页多少条数据",dataType = "Integer")
+    })
+    @PostMapping("/addData")
+    public void addData(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit){
+        Page<Customer> customerPage = new Page<>(page,limit);
+        Page<Customer> page1 = customerService.page(customerPage);
+        List<Customer> records = page1.getRecords();
+        List<SaleChance> collect = records.stream().map(customer -> {
+            SaleChance saleChance = new SaleChance();
+            saleChance.setCustomerId(customer.getId());
+            saleChance.setCustomerName(customer.getName());
+            saleChance.setLevel(customer.getLevel());
+            saleChance.setAddr(customer.getAddr());
+            saleChance.setSex(customer.getSex());
+            saleChance.setTelephone(customer.getTelephone());
+            saleChance.setChanceFrom("连锁介绍");
+            saleChance.setSuccessRate(78);
+            saleChance.setSummary("根据各客户之间的社会关系，通过客户之间的连锁介绍来寻找更多的新客户。");
+            saleChance.setDescription("他们可以帮你介绍客户，使你获得更多的准意向客户。此外，也不能否认有些客户确实有二次置业或多次置业的能力。");
+            saleChance.setState(1);
+            saleChance.setCreateUserid(10);
+            saleChance.setCreateUsername("黄月英");
+            saleChance.setCreateTime(new Date());
+            return saleChance;
+        }).collect(Collectors.toList());
+        saleChanceService.saveBatch(collect);
+    }
 
 }
 

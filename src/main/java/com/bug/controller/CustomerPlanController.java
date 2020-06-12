@@ -41,12 +41,12 @@ public class CustomerPlanController {
      */
     @ApiOperation(value = "获取当前登录用户被指派的计划",notes = "获取当前登录用户被指派的计划")
     @GetMapping("/getCustomerPlans")
-    public ResponseResult<List<CustomerPlan>> getCustomerPlans(@RequestParam(value = "page",defaultValue = "1") Integer page, @RequestParam(value = "limit",defaultValue = "10") Integer limit, HttpServletRequest request){
+    public ResponseResult<List<CustomerPlan>> getCustomerPlans(@RequestParam(value = "page",defaultValue = "1") Integer page, @RequestParam(value = "limit",defaultValue = "10") Integer limit,@RequestParam(value = "customerName",required=false) String customerName ,HttpServletRequest request){
         // 获取当前登录的账号
 //        String account = (String) request.getSession().getAttribute("account");
         String account = "123456";
         // 只需要获取当前的账号
-        ResponseResult<List<CustomerPlan>> responseResult = customerPlanService.getChanceAndPlanVo(page,limit,account);
+        ResponseResult<List<CustomerPlan>> responseResult = customerPlanService.getChanceAndPlanVo(page,limit,account,customerName);
         return responseResult;
     }
 
